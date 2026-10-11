@@ -1,0 +1,75 @@
+name: enterprise-kb
+
+# ============================================================
+# 共享基础设施栈（与 SmartQuery / 简历推荐系统同一套 rag-* 容器）
+#
+# 关键：compose 项目名必须是 enterprise-kb（与 SmartQuery 一致）——
+# rag-* 容器是在该项目名下创建的，项目名一致时 compose up 直接接管
+# 已有容器（幂等），项目名不同则报 "container name already in use"。
+#
+# 用法约定（沿用其他项目的共享模式）：
+# - 容器名/端口/数据卷与各项目完全一致：共享同一个 MySQL/Milvus 服务器，
+#   映射端口自然也是同一个（3306/19530），不存在"同服务器不同端口"
+# - 项目间隔离靠 MySQL 库名（interviewace_db）与 Milvus 集合名（interview_kb）
+# - 本项目不需要 MongoDB/ES，故未列出（compose 不会动未列出的容器；
+#   若看到 orphan containers 警告属正常，不要加 --remove-orphans）
+# ============================================================
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: rag-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: resume_rag_db   # 容器首启建库用；interviewace_db 由应用 init_db 自动创建
+    ports:
+      - "3306:3306"
+    volumes:
+      - D:\DockerData\ResumeRAG\mysql:/var/lib/mysql
+    restart: no
+
+  etcd:
+    image: quay.m.daocloud.io/coreos/etcd:v3.5.18
+    container_name: rag-etcd
+    environment:
+      - ETCD_AUTO_COMPACTION_MODE=revision
+      - ETCD_AUTO_COMPACTION_RETENTION=1000
+      - ETCD_QUOTA_BACKEND_BYTES=4294967296
+      - ETCD_SNAPSHOT_COUNT=50000
+    volumes:
+      - D:\DockerData\ResumeRAG\etcd:/etcd
+    command: etcd -advertise-client-urls=http://etcd:2379 -listen-client-urls http://0.0.0.0:2379 --data-dir /etcd
+    ports:
+      - "2379:2379"
+    restart: no
+
+  minio:
+    image: minio/minio:RELEASE.2023-03-20T20-16-18Z
+    container_name: rag-minio
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - D:\DockerData\ResumeRAG\minio:/data
+    restart: no
+
+  milvus:
+    image: milvusdb/milvus:v2.6.13
+    container_name: rag-milvus
+    ports:
+      - "19530:19530"
+      - "9091:9091"
+    environment:
+      ETCD_ENDPOINTS: etcd:2379
+      MINIO_ADDRESS: minio:9000
+    command: milvus run standalone
+    depends_on:
+      - etcd
+      - minio
+    volumes:
+      - D:\DockerData\ResumeRAG\milvus:/var/lib/milvus
+    restart: no

@@ -1,0 +1,45 @@
+# Web 框架与 API
+fastapi>=0.110
+uvicorn>=0.29
+python-dotenv>=1.0
+pydantic>=2.6
+python-multipart>=0.0.9
+
+# 认证与安全
+PyJWT>=2.8
+passlib[bcrypt]>=1.7
+
+# LangChain / LangGraph
+langchain>=0.2
+langchain-openai>=0.1
+langchain-community>=0.2
+langchain-text-splitters>=0.2
+langgraph>=0.2
+tenacity>=8.2
+
+# 向量数据库与存储
+pymilvus>=2.4
+sqlalchemy>=2.0
+pymysql>=1.1
+
+# 文档解析
+pymupdf>=1.24
+docx2txt>=0.8
+openpyxl>=3.1
+
+# 嵌入与重排序模型（bge-m3 / bge-reranker-v2-m3，本地缓存复用 SmartQuery）
+sentence-transformers>=3.0
+FlagEmbedding>=1.2.10
+
+# 请求
+requests>=2.31
+
+# 数据集下载（data_pipeline HF 数据源用）
+datasets>=2.18
+
+# 可观测性（Prometheus 指标）
+prometheus-client>=0.20
+
+# 测试
+pytest>=8.0
+httpx>=0.27

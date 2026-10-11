@@ -1,0 +1,53 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+# 千问聊天模型
+QWEN_API_KEY = os.getenv("QWEN_API_KEY")
+QWEN_BASE_URL = os.getenv("QWEN_BASE_URL")
+QWEN_MODEL = os.getenv("QWEN_MODEL")
+
+# 嵌入模型
+QWEN_EMBEDDING_MODEL = os.getenv("QWEN_EMBEDDING_MODEL")
+
+# 视觉/OCR 模型（简历扫描件、图片识别）
+QWEN_VL_OCR_MODEL = os.getenv("QWEN_VL_OCR_MODEL", "qwen-vl-max")
+
+# 豆包流式语音识别 2.0（火山引擎 sauc bigmodel_async）
+VOLC_ASR_API_KEY = os.getenv("VOLC_ASR_API_KEY", "")
+VOLC_ASR_RESOURCE_ID = os.getenv("VOLC_ASR_RESOURCE_ID", "volc.seedasr.sauc.duration")
+VOLC_ASR_ENDPOINT = os.getenv("VOLC_ASR_ENDPOINT", "wss://openspeech.bytedance.com/api/v3/sauc/bigmodel_async")
+
+# 评测裁判模型（LLM-as-Judge）：用更强的模型，缺省回退到聊天模型与同一套凭据
+JUDGE_MODEL = os.getenv("JUDGE_MODEL", QWEN_MODEL)
+JUDGE_API_KEY = os.getenv("JUDGE_API_KEY", QWEN_API_KEY)
+JUDGE_BASE_URL = os.getenv("JUDGE_BASE_URL", QWEN_BASE_URL)
+
+# 认证（JWT）
+JWT_SECRET = os.getenv("JWT_SECRET", "dev-secret-change-me")
+JWT_EXPIRE_MINUTES = int(os.getenv("JWT_EXPIRE_MINUTES", "720"))
+DEFAULT_ADMIN_USER = os.getenv("DEFAULT_ADMIN_USER", "admin")
+DEFAULT_ADMIN_PASSWORD = os.getenv("DEFAULT_ADMIN_PASSWORD", "admin123")
+
+# 是否开放自助注册（生产建议 false，改为管理员创建用户）
+ALLOW_REGISTRATION = os.getenv("ALLOW_REGISTRATION", "true").lower() in ("1", "true", "yes")
+
+# 每用户每日 LLM token 预算（超限拒绝新的提问；0 表示不限制）
+DAILY_TOKEN_BUDGET = int(os.getenv("DAILY_TOKEN_BUDGET", "500000"))
+
+MYSQL_HOST = os.getenv("MYSQL_HOST")
+MYSQL_PORT = int(os.getenv("MYSQL_PORT"))
+MYSQL_USER = os.getenv("MYSQL_USER")
+MYSQL_PASSWORD = os.getenv("MYSQL_PASSWORD")
+MYSQL_DATABASE = os.getenv("MYSQL_DATABASE")
+
+MILVUS_HOST = os.getenv("MILVUS_HOST")
+MILVUS_PORT = int(os.getenv("MILVUS_PORT"))
+
+# 检索集合与稠密维度（qwen dense=2048，默认集合 interview_kb）
+RAG_COLLECTION = os.getenv("RAG_COLLECTION", "interview_kb")
+RAG_DIM = int(os.getenv("RAG_DIM", "2048"))
+
+# HF_HOME 会被 load_dotenv() 读到环境变量，SentenceTransformer 导入时自动识别。
+# 默认指向 SmartQuery 的模型缓存（bge-m3 / bge-reranker-v2-m3 无需重复下载），见 .env.example

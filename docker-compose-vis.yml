@@ -1,0 +1,41 @@
+name: enterprise-kb
+
+# ============================================================
+# 可视化工具栈（与 SmartQuery / 简历推荐系统同一套约定，同一 compose 项目名）
+#
+# - phpMyAdmin → 共享 rag-mysql（本项目只看 interviewace_db 库）
+#   http://localhost:8080  （root / 123456）
+# - Attu → 共享 rag-milvus（本项目只看 interview_kb 集合）
+#   http://localhost:8001  （连接地址 rag-milvus:19530）
+#
+# 可视化容器必须加入 rag-* 所在的 enterprise-kb_default 网络才能解析容器名。
+# ============================================================
+
+networks:
+  shared:
+    external: true
+    name: enterprise-kb_default
+
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: no
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: rag-mysql
+      PMA_PORT: 3306
+    networks:
+      - shared
+
+  attu:
+    image: zilliz/attu:latest
+    container_name: attu
+    restart: no
+    ports:
+      - "8001:3000"
+    environment:
+      MILVUS_URL: rag-milvus:19530
+    networks:
+      - shared
