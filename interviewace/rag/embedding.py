@@ -26,8 +26,15 @@ def embed_documents(texts: list[str]) -> list[list[float]]:
 
 
 def embed_query(text: str) -> list[float]:
-    """qwen 稠密向量——单条查询"""
-    return embeddings.embed_query(text)
+    """qwen 稠密向量——单条查询（带进程内缓存，同一句话不重复调 API）"""
+    from interviewace.backend.cache import dense_cache, hash_key
+    key = hash_key(text)
+    cached = dense_cache.get(key)
+    if cached is not None:
+        return cached
+    vec = embeddings.embed_query(text)
+    dense_cache.put(key, vec)
+    return vec
 
 
 # ---------------- BGE-M3：稀疏词汇权重（懒加载单例） ---------------- #
@@ -52,5 +59,13 @@ def embed_documents_sparse(texts: list[str]) -> list[dict[int, float]]:
 
 
 def embed_query_sparse(text: str) -> dict[int, float]:
+    """bge-m3 稀疏词权重——单条查询（带进程内缓存）"""
+    from interviewace.backend.cache import hash_key, sparse_cache
+    key = hash_key(text)
+    cached = sparse_cache.get(key)
+    if cached is not None:
+        return cached
     out = _get_sparse_model().encode([text], return_sparse=True, return_dense=False)
-    return {int(t): float(w) for t, w in out["lexical_weights"][0].items()}
+    vec = {int(t): float(w) for t, w in out["lexical_weights"][0].items()}
+    sparse_cache.put(key, vec)
+    return vec

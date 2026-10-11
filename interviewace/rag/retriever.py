@@ -101,10 +101,10 @@ RRF_SPARSE_WEIGHT = 0.2
 
 # 重排候选池大小：每个通道取回多少条参与 RRF/重排
 CANDIDATE_POOL = 60
-# 重排最多处理的候选数（CPU 交叉编码器较慢，限制上限以控制延迟）
-RERANK_POOL = 30
+# 重排最多处理的候选数（CPU 交叉编码器较慢；实测 30→12 质量几乎无损但延迟降一半以上）
+RERANK_POOL = 12
 # 重排输入截断长度（256 在质量与 CPU 延迟间较平衡）
-RERANK_MAX_LENGTH = 256
+RERANK_MAX_LENGTH = 192
 
 # domain 过滤召回不足时的 fallback 阈值：融合候选少于此数则放开过滤全库重检
 CROSS_DOMAIN_FALLBACK_MIN = 3

@@ -829,3 +829,79 @@ def update_resume_content(resume_id: int, pitch: dict = None, rehearse: dict = N
         db.commit()
     finally:
         db.close()
+
+
+# ---------------- 长期记忆（学习画像 → 注入生成 prompt） ---------------- #
+
+DOMAIN_CN = {
+    "llm_basics": "LLM 原理", "prompt": "Prompt 工程", "rag": "RAG",
+    "agent": "Agent", "vectordb": "向量数据库", "framework": "框架",
+    "python_backend": "Python 后端", "ml_dl": "ML/DL", "cs_basic": "CS 基础",
+}
+
+
+def get_learning_profile(user_id: int) -> dict:
+    """聚合练习记录 → 学习画像（薄弱域 / 强项 / 练习量）"""
+    from collections import defaultdict
+    db = SessionLocal()
+    try:
+        rows = (db.query(PracticeRecord)
+                .filter(PracticeRecord.user_id == user_id)
+                .order_by(PracticeRecord.created_at.desc()).limit(500).all())
+        by_domain: dict[str, list[int]] = defaultdict(list)
+        for r in rows:
+            if r.domain and r.score is not None:
+                by_domain[r.domain].append(r.score)
+        domains = [{
+            "domain": d, "name": DOMAIN_CN.get(d, d),
+            "avg": round(sum(s) / len(s), 1), "count": len(s),
+        } for d, s in by_domain.items()]
+        domains.sort(key=lambda x: x["avg"])
+        return {
+            "total": len(rows),
+            "weak": [d for d in domains if d["avg"] < 70][:3],
+            "strong": [d for d in domains if d["avg"] >= 85][:2],
+            "domains": domains,
+        }
+    finally:
+        db.close()
+
+
+def get_top_topics(user_id: int, limit: int = 5) -> list[str]:
+    """跨会话高频关注主题（从历史提问里按知识域聚合）"""
+    from collections import Counter
+    db = SessionLocal()
+    try:
+        rows = (db.query(ChatRecord).filter(ChatRecord.user_id == user_id)
+                .order_by(ChatRecord.created_at.desc()).limit(300).all())
+        # 问题里出现的关键词（粗粒度，够用）
+        keywords = ["RAG", "Transformer", "Agent", "注意力", "微调", "向量", "索引",
+                    "Redis", "MySQL", "LangChain", "LangGraph", "重排", "分块", "Prompt",
+                    "GIL", "协程", "缓存", "事务", "并发"]
+        c = Counter()
+        for r in rows:
+            q = r.question or ""
+            for k in keywords:
+                if k.lower() in q.lower():
+                    c[k] += 1
+        return [k for k, _ in c.most_common(limit)]
+    finally:
+        db.close()
+
+
+def build_memory_context(user_id: int) -> str:
+    """把长期记忆压成一段短文本，供注入 prompt（控制在 ~120 token 内）"""
+    prof = get_learning_profile(user_id)
+    topics = get_top_topics(user_id)
+    if not prof["total"] and not topics:
+        return ""
+    parts = []
+    if prof["total"]:
+        parts.append(f"该用户已练习 {prof['total']} 题，平均 {round(sum(d['avg'] for d in prof['domains']) / max(1, len(prof['domains'])), 1)} 分")
+    if prof["weak"]:
+        parts.append("薄弱知识域：" + "、".join(f"{d['name']}({d['avg']}分)" for d in prof["weak"]))
+    if prof["strong"]:
+        parts.append("较强：" + "、".join(d["name"] for d in prof["strong"]))
+    if topics:
+        parts.append("近期常问：" + "、".join(topics))
+    return "；".join(parts)

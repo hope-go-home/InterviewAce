@@ -120,7 +120,17 @@ _LEVEL_NOTE = {
 
 
 def evaluate_answer(question: str, answer: str, level: str = "campus") -> dict:
-    """检索参考答案 → LLM 评分。返回结构化评分结果。"""
+    """检索参考答案 → LLM 评分。返回结构化评分结果。
+
+    带缓存：同一 (题目, 作答, 级别) 重复提交直接命中（评分是 temperature=0 的确定性调用）
+    """
+    from interviewace.backend.cache import hash_key, llm_cache
+    ck = hash_key("eval", question, answer, level)
+    cached = llm_cache.get(ck)
+    if cached is not None:
+        logger.info("evaluate_answer cache_hit q=%s", question[:40])
+        return cached
+
     # 1. 检索该题的参考答案（RAG 提供评分依据）
     reference = ""
     ref_url = ""
@@ -159,7 +169,7 @@ def evaluate_answer(question: str, answer: str, level: str = "campus") -> dict:
     except (TypeError, ValueError):
         score = None
 
-    return {
+    out = {
         "score": score,
         "dimensions": data.get("dimensions", {}),
         "feedback": data.get("feedback", ""),
@@ -167,3 +177,5 @@ def evaluate_answer(question: str, answer: str, level: str = "campus") -> dict:
         "reference_answer": reference,
         "reference_url": ref_url,
     }
+    llm_cache.put(ck, out)
+    return out

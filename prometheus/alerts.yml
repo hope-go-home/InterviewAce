@@ -1,0 +1,68 @@
+# Prometheus 告警规则（配合 /metrics 端点使用）
+#
+# 指标来源：interviewace/backend/metrics.py 暴露的 http_requests_total /
+#           http_request_duration_seconds / rag_retrieval_seconds 等
+#
+# 接入：在 prometheus.yml 里 rules_files 指向本文件；
+#       或用 --web.enable-lifecycle 热加载。
+
+groups:
+  - name: interviewace-api
+    rules:
+      # 5xx 错误率 > 5%（持续 5 分钟）
+      - alert: HighErrorRate
+        expr: |
+          sum(rate(http_requests_total{status=~"5.."}[5m]))
+          / sum(rate(http_requests_total[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "接口 5xx 错误率超过 5%"
+          description: "近 5 分钟 5xx 占比 {{ $value | humanizePercentage }}，检查后端日志与 LLM 上游额度"
+
+      # P95 延迟 > 60s（问答含 LLM 生成，阈值放宽；超过说明上游卡住）
+      - alert: HighLatencyP95
+        expr: |
+          histogram_quantile(0.95,
+            sum(rate(http_request_duration_seconds_bucket[5m])) by (le, path)
+          ) > 60
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "接口 P95 延迟超过 60s（path={{ $labels.path }}）"
+          description: "可能是 LLM 上游限流或 CPU 重排排队，检查 /cache/stats 与上游额度"
+
+      # 检索耗时 P95 > 30s（CPU 重排变慢的信号）
+      - alert: SlowRetrieval
+        expr: |
+          histogram_quantile(0.95, sum(rate(rag_retrieval_seconds_bucket[5m])) by (le)) > 30
+        for: 10m
+        labels:
+          severity: info
+        annotations:
+          summary: "检索+重排 P95 超过 30s"
+          description: "考虑调小 RERANK_POOL 或上 GPU"
+
+      # 服务探针失败
+      - alert: ServiceDown
+        expr: up{job="interviewace"} == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "求职助手后端不可达"
+
+  - name: interviewace-quality
+    rules:
+      # 检索召回骤降（缓存穿透或索引异常时会出现）
+      - alert: RetrievalHitDrop
+        expr: |
+          histogram_quantile(0.5, sum(rate(rag_retrieval_hits_bucket[10m])) by (le)) < 1
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "检索中位命中来源数 < 1，可能出现大面积空召回"
+          description: "检查 Milvus 集合是否正常加载、是否误删数据"

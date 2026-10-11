@@ -6,6 +6,8 @@ M1+ 陆续挂载：/qa/stream（题库问答）、/interview/*（模拟面试）
 启动韧性：依赖（Milvus/MySQL）连接失败只记警告不崩溃——
 保证 /health 存活探针永远可用，依赖状态由 /ready 就绪探针报告。
 """
+import asyncio
+import os
 import time
 import uuid
 from contextlib import asynccontextmanager
@@ -283,6 +285,37 @@ def bank_add(req: BankAddRequest, user: dict = Depends(get_current_user)):
     return {"inserted": n, "question": question}
 
 
+# ---------------- 并发背压（过载保护） ---------------- #
+
+# 重请求（跑检索/重排/LLM）的全局并发上限。超过就直接 429 + Retry-After，
+# 而不是把请求排进队列拖到超时（企业级做法：体面地拒绝 > 雪崩）
+MAX_CONCURRENT_HEAVY = int(os.getenv("MAX_CONCURRENT_HEAVY", "8"))
+_heavy_sem = asyncio.Semaphore(MAX_CONCURRENT_HEAVY)
+
+
+async def _acquire_heavy():
+    """尝试占一个重请求槽；过载时抛 429"""
+    try:
+        await asyncio.wait_for(_heavy_sem.acquire(), timeout=2.0)
+    except asyncio.TimeoutError:
+        raise HTTPException(
+            status_code=429,
+            detail="当前请求较多，请稍后重试",
+            headers={"Retry-After": "3"},
+        )
+
+
+def _release_heavy():
+    _heavy_sem.release()
+
+
+@app.get("/cache/stats", tags=["ops"])
+def cache_stats(user: dict = Depends(get_current_user)):
+    """缓存命中率（排查成本/性能用）"""
+    from interviewace.backend.cache import all_stats
+    return {"caches": all_stats(), "heavy_concurrency_limit": MAX_CONCURRENT_HEAVY}
+
+
 # ---------------- 题库问答（SSE 流式） ---------------- #
 
 class QARequest(BaseModel):
@@ -316,9 +349,13 @@ async def qa_stream(req: QARequest, request: Request, user: dict = Depends(get_c
     from interviewace.services.qa_service import app as qa_app, build_initial_state
 
     session_id = req.session_id or uuid.uuid4().hex[:16]
-    history = db.get_history(session_id, user_id=user["id"])
+    # 长期记忆 + 会话历史（阻塞查询，丢线程池）
+    history, user_memory = await asyncio.to_thread(
+        lambda: (db.get_history(session_id, user_id=user["id"]),
+                 db.build_memory_context(user["id"])))
     initial = build_initial_state(question, history, image_base64=req.image_base64 or "",
-                                  position=req.position, level=req.level)
+                                  position=req.position, level=req.level,
+                                  user_memory=user_memory)
 
     async def event_gen():
         final_answer = ""
@@ -385,7 +422,10 @@ async def qa_stream(req: QARequest, request: Request, user: dict = Depends(get_c
                                    ip=client_ip(request))
                 except Exception as e:
                     logger.warning("qa_stream persist failed: %s", e)
+            _release_heavy()          # 释放并发槽
 
+    # 在返回流之前占并发槽：过载直接 429（而不是流开始后才失败）
+    await _acquire_heavy()
     return StreamingResponse(event_gen(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache",
                                       "X-Accel-Buffering": "no"})
@@ -670,16 +710,24 @@ def interview_start(req: InterviewStartRequest, user: dict = Depends(get_current
 
 
 @app.post("/interview/{session_id}/answer", tags=["interview"])
-def interview_answer(session_id: int, req: InterviewAnswerRequest,
-                     user: dict = Depends(get_current_user)):
+async def interview_answer(session_id: int, req: InterviewAnswerRequest,
+                           user: dict = Depends(get_current_user)):
     """提交作答 → 评分 → 追问/下一题/报告"""
     from interviewace.services import interview_service
     if not interview_limiter.allow(str(user["id"])):
         raise HTTPException(status_code=429, detail="操作过于频繁，请稍后再试")
-    try:
+
+    def _work():
         return interview_service.submit_answer(session_id, req.turn_id, req.answer, user["id"])
+
+    await _acquire_heavy()
+    try:
+        # 评分/检索是阻塞操作（同步 LLM + CPU 重排），丢线程池避免堵事件循环
+        return await asyncio.to_thread(_work)
     except RuntimeError as e:
         raise HTTPException(status_code=400, detail=str(e))
+    finally:
+        _release_heavy()
 
 
 @app.get("/interview/{session_id}", tags=["interview"])
@@ -847,7 +895,7 @@ def practice_batch(n: int = 8, domain: str | None = None, difficulty: int | None
 
 
 @app.post("/practice/answer", tags=["practice"])
-def practice_answer(req: PracticeAnswerRequest, user: dict = Depends(get_current_user)):
+async def practice_answer(req: PracticeAnswerRequest, user: dict = Depends(get_current_user)):
     """提交作答 → RAG 找参考答案 → AI 评分 → 写练习记录"""
     from interviewace.services import practice_service
 
@@ -856,25 +904,31 @@ def practice_answer(req: PracticeAnswerRequest, user: dict = Depends(get_current
     if not interview_limiter.allow(str(user["id"])):
         raise HTTPException(status_code=429, detail="操作过于频繁，请稍后再试")
 
-    result = practice_service.evaluate_answer(req.question_title, req.my_answer, req.level)
+    def _work():
+        result = practice_service.evaluate_answer(req.question_title, req.my_answer, req.level)
+        is_wrong = result["score"] is not None and result["score"] < 60
+        record_id = db.save_practice(
+            user_id=user["id"], question_title=req.question_title,
+            question_url=req.question_url, my_answer=req.my_answer,
+            score=result["score"] or 0, feedback=result["feedback"],
+            missing_points=result["missing_points"], dim_json=result["dimensions"],
+            domain=req.domain, difficulty=req.difficulty,
+            position=req.position, level=req.level,
+        )
+        if is_wrong:
+            db.add_favorite(user["id"], req.question_title, ftype="wrong",
+                            domain=req.domain, difficulty=req.difficulty,
+                            question_url=req.question_url)
+        db.write_audit(user["id"], user["username"], "chat", resource="practice",
+                       detail=req.question_title[:100])
+        return {**result, "record_id": record_id, "is_wrong": is_wrong}
 
-    is_wrong = result["score"] is not None and result["score"] < 60
-    record_id = db.save_practice(
-        user_id=user["id"], question_title=req.question_title,
-        question_url=req.question_url, my_answer=req.my_answer,
-        score=result["score"] or 0, feedback=result["feedback"],
-        missing_points=result["missing_points"], dim_json=result["dimensions"],
-        domain=req.domain, difficulty=req.difficulty,
-        position=req.position, level=req.level,
-    )
-    if is_wrong:
-        db.add_favorite(user["id"], req.question_title, ftype="wrong",
-                        domain=req.domain, difficulty=req.difficulty,
-                        question_url=req.question_url)
-    db.write_audit(user["id"], user["username"], "chat", resource="practice",
-                   detail=req.question_title[:100])
-
-    return {**result, "record_id": record_id, "is_wrong": is_wrong}
+    await _acquire_heavy()
+    try:
+        # 评分含同步 LLM + CPU 重排，丢线程池避免阻塞事件循环
+        return await asyncio.to_thread(_work)
+    finally:
+        _release_heavy()
 
 
 @app.get("/practice/records", tags=["practice"])

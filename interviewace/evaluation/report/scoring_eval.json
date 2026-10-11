@@ -1,0 +1,12 @@
+{
+  "samples": 18,
+  "source": "synthetic",
+  "spearman": 0.822,
+  "within_10pt_rate": 0.556,
+  "band_means": {
+    "90": 89.7,
+    "65": 57.5,
+    "30": 12.5
+  },
+  "generated_at": "2026-10-12 04:28:32"
+}

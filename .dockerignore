@@ -1,0 +1,24 @@
+.git
+.gitignore
+.venv
+venv
+__pycache__
+*.pyc
+.pytest_cache
+.idea
+.vscode
+
+# 数据与模型缓存不打进镜像
+data/raw
+data/jsonl
+data/hf-cache
+frontend/node_modules
+frontend/dist
+
+# 密钥与日志
+.env
+logs
+logs_*.log
+
+# 文档截图
+docs/screenshots

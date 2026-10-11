@@ -1,0 +1,8 @@
+{
+  "samples": 10,
+  "tier": "B",
+  "correctness": 4.8,
+  "faithfulness": 4.3,
+  "hallucination_rate": 0.1,
+  "generated_at": "2026-10-12 04:15:32"
+}

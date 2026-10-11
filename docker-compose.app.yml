@@ -1,0 +1,51 @@
+# 应用栈：后端 + 前端（基础设施复用共享的 rag-* 容器）
+#
+# 用法：
+#   docker compose -f docker-compose.app.yml up -d --build
+# 前端 http://localhost:8088 → 反代后端 → 共享 rag-mysql / rag-milvus
+#
+# 注意：需要基础设施先起（docker compose up -d），应用加入其网络按容器名互访。
+name: interviewace-app
+
+networks:
+  shared:
+    external: true
+    name: enterprise-kb_default
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: interviewace-backend
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # 容器内按容器名访问共享基础设施（覆盖 .env 里的 127.0.0.1）
+      MYSQL_HOST: rag-mysql
+      MYSQL_PORT: "3306"
+      MILVUS_HOST: rag-milvus
+      MILVUS_PORT: "19530"
+      # 本地模型缓存复用宿主机已下载的 bge-m3 / bge-reranker
+      HF_HOME: /hf-cache
+    volumes:
+      - ${HF_CACHE_DIR:-./data/hf-cache}:/hf-cache
+      - ./data:/app/data
+      - ./logs:/app/logs
+    ports:
+      - "8002:8002"
+    networks:
+      - shared
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: interviewace-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "8088:80"
+    networks:
+      - shared

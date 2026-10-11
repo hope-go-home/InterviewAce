@@ -25,3 +25,6 @@ frontend/dist/
 
 # 运行时日志（根目录）
 logs_*.log
+
+# 评测断点续跑中间文件（报告本身要提交）
+*.checkpoint.jsonl

@@ -1,0 +1,1388 @@
+[
+  {
+    "query": "你能先简单说一下，LangGraph 是什么？在实现状态机式 Agent 时，它主要解决什么问题？",
+    "gold": "你能先简单说一下，LangGraph 是什么？在实现状态机式 Agent 时，它主要解决什么问题？",
+    "domain": "agent",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "请简述 HTTPS 中 TLS 握手阶段的核心目标，并说明为什么需要引入非对称加密与对称加密的混合机制？",
+    "gold": "请简述 HTTPS 中 TLS 握手阶段的核心目标，并说明为什么需要引入非对称加密与对称加密的混合机制？",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "相比过采样（如SMOTE），代价敏感学习（Cost-Sensitive Learning）在处理极端不平衡数据时有何优势？请结合XGBoost/LightGBM",
+    "gold": "相比过采样（如SMOTE），代价敏感学习（Cost-Sensitive Learning）在处理极端不平衡数据时有何优势？请结合XGBoost/LightGBM",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "领域模型微调 指令\\&数据输入格式 要求？",
+    "gold": "领域模型微调 指令\\&数据输入格式 要求？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在进行全模型微调（Full Fine-tuning）时，经常遇到‘灾难性遗忘’现象，即模型在新数据上表现提升，但在旧类别或原始预训练任务上的泛化能力下降。请解释",
+    "gold": "在进行全模型微调（Full Fine-tuning）时，经常遇到‘灾难性遗忘’现象，即模型在新数据上表现提升，但在旧类别或原始预训练任务上的泛化能力下降。请解释",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "一、baichuan-7B篇？",
+    "gold": "一、baichuan-7B篇？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "多智能体冲突解决",
+    "gold": "多智能体冲突解决",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "Agent和LLM有什么区别",
+    "gold": "Agent和LLM有什么区别",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "Layer normalization 对比篇？",
+    "gold": "Layer normalization 对比篇？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "async def 定义的协程函数和普通函数有什么区别？调用它时返回什么？",
+    "gold": "async def 定义的协程函数和普通函数有什么区别？调用它时返回什么？",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "在分库分表场景下，为什么通常不建议使用数据库自增主键或 UUID 作为分布式 ID？请对比雪花算法（Snowflake）和 Redis INCR 方案在生成性能",
+    "gold": "在分库分表场景下，为什么通常不建议使用数据库自增主键或 UUID 作为分布式 ID？请对比雪花算法（Snowflake）和 Redis INCR 方案在生成性能",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在处理极端类别不平衡且存在大量难分样本的数据集时，你会如何组合使用 Focal Loss 和 Class Weights？请说明理由。",
+    "gold": "在处理极端类别不平衡且存在大量难分样本的数据集时，你会如何组合使用 Focal Loss 和 Class Weights？请说明理由。",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "请设计一个电商售后助手，需求包括：退货政策问答、订单状态查询、退款申请提交。请说明哪些部分你会用固定 Chain、哪些用 Agent、Retriever 和 T",
+    "gold": "请设计一个电商售后助手，需求包括：退货政策问答、订单状态查询、退款申请提交。请说明哪些部分你会用固定 Chain、哪些用 Agent、Retriever 和 T",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在生产环境中，为什么通常建议对 Redis Cluster 使用客户端分片（如 JedisCluster）而不是代理模式？如果集群节点发生主从切换，客户端如何保",
+    "gold": "在生产环境中，为什么通常建议对 Redis Cluster 使用客户端分片（如 JedisCluster）而不是代理模式？如果集群节点发生主从切换，客户端如何保",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "How can adversaries craft queries specifically designed to fool CRAG's retrieval",
+    "gold": "How can adversaries craft queries specifically designed to fool CRAG's retrieval",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "数据结构：红黑树",
+    "gold": "数据结构：红黑树",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "自我修正式 Prompt 有什么局限或风险？什么情况下不适合用？",
+    "gold": "自我修正式 Prompt 有什么局限或风险？什么情况下不适合用？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "在开发AI应用推荐系统时，我们需要缓存用户的历史行为向量。如果向量数据较大（KB级别），且更新频率较低，但读取极高频。在这种场景下，如何设计缓存策略以避免‘缓存",
+    "gold": "在开发AI应用推荐系统时，我们需要缓存用户的历史行为向量。如果向量数据较大（KB级别），且更新频率较低，但读取极高频。在这种场景下，如何设计缓存策略以避免‘缓存",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "Supervisor 模式最容易出现错误路由和无限循环。你会在 prompt、输出协议、状态机和运行时护栏上怎么设计？",
+    "gold": "Supervisor 模式最容易出现错误路由和无限循环。你会在 prompt、输出协议、状态机和运行时护栏上怎么设计？",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "线上服务偶发超时，你怀疑某个 `async def` 视图中存在同步阻塞调用。请设计一个最小诊断方案，量化事件循环阻塞程度并定位到具体路径。",
+    "gold": "线上服务偶发超时，你怀疑某个 `async def` 视图中存在同步阻塞调用。请设计一个最小诊断方案，量化事件循环阻塞程度并定位到具体路径。",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "统一向量存储接口在生产环境会遇到不同库的限流、超时和批量部分写入失败。你会如何在接口层设计错误分类、重试策略和部分失败返回，避免把底层 SDK 的细节泄漏给业务",
+    "gold": "统一向量存储接口在生产环境会遇到不同库的限流、超时和批量部分写入失败。你会如何在接口层设计错误分类、重试策略和部分失败返回，避免把底层 SDK 的细节泄漏给业务",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "LangChain中的Tool抽象是干什么的？如果要实现一个自定义工具，需要提供哪些关键信息？",
+    "gold": "LangChain中的Tool抽象是干什么的？如果要实现一个自定义工具，需要提供哪些关键信息？",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "备份任务会占用 CPU/IO，且存储成本随数据量增长。你会通过哪些策略在备份性能、恢复速度和成本之间做权衡？请举例说明。",
+    "gold": "备份任务会占用 CPU/IO，且存储成本随数据量增长。你会通过哪些策略在备份性能、恢复速度和成本之间做权衡？请举例说明。",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "GloVe 模型试图融合计数统计与局部上下文信息，请解释其损失函数中 $V_{ij}$ 的含义及权重函数 $f(x)$ 的设计意图。为什么 GloVe 通常比",
+    "gold": "GloVe 模型试图融合计数统计与局部上下文信息，请解释其损失函数中 $V_{ij}$ 的含义及权重函数 $f(x)$ 的设计意图。为什么 GloVe 通常比",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "请介绍一下Python GC中引用计数机制的基本原理，并说明哪些典型操作会增加或减少引用计数。",
+    "gold": "请介绍一下Python GC中引用计数机制的基本原理，并说明哪些典型操作会增加或减少引用计数。",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "向量数据库的存储引擎为什么通常要同时管理向量、元数据和原始文本？它和传统 OLTP 存储设计有什么不同？请从 WAL、LSM、段合并、mmap 角度说明。",
+    "gold": "向量数据库的存储引擎为什么通常要同时管理向量、元数据和原始文本？它和传统 OLTP 存储设计有什么不同？请从 WAL、LSM、段合并、mmap 角度说明。",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "如果在微调过程中发现验证集Loss不降反升，可能的原因有哪些？针对迁移学习场景，你会如何调整？",
+    "gold": "如果在微调过程中发现验证集Loss不降反升，可能的原因有哪些？针对迁移学习场景，你会如何调整？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "DPO 和 RLHF 在优化方式上有本质区别吗？如果业务偏好持续变化，并且需要模型探索新回答，你会怎么设计训练流程？",
+    "gold": "DPO 和 RLHF 在优化方式上有本质区别吗？如果业务偏好持续变化，并且需要模型探索新回答，你会怎么设计训练流程？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "如果用户输入可能包含类似 {{ }}、{% %} 或“忽略以上指令”的内容，你的模板化和变量插值方案如何防止模板注入和 Prompt 注入？",
+    "gold": "如果用户输入可能包含类似 {{ }}、{% %} 或“忽略以上指令”的内容，你的模板化和变量插值方案如何防止模板注入和 Prompt 注入？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在8k上下文的RAG客服中，system prompt、检索片段、多轮历史、当前用户输入和输出预留，你会怎么分预算？给初始比例和动态调整规则，并解释为什么不是固",
+    "gold": "在8k上下文的RAG客服中，system prompt、检索片段、多轮历史、当前用户输入和输出预留，你会怎么分预算？给初始比例和动态调整规则，并解释为什么不是固",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在批量调用大模型API的脚本里，你用 for 循环为每个样本创建日志回调闭包，但运行时所有回调都打印了最后一个 sample_id。请解释闭包 late bin",
+    "gold": "在批量调用大模型API的脚本里，你用 for 循环为每个样本创建日志回调闭包，但运行时所有回调都打印了最后一个 sample_id。请解释闭包 late bin",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "实现一次典型的 LangGraph interrupt 人机协同，至少需要哪些核心组件？请分别说明作用。",
+    "gold": "实现一次典型的 LangGraph interrupt 人机协同，至少需要哪些核心组件？请分别说明作用。",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "L2 正则化（Weight Decay）是如何约束模型参数以防止过拟合的？它在优化目标函数中起到了什么作用？",
+    "gold": "L2 正则化（Weight Decay）是如何约束模型参数以防止过拟合的？它在优化目标函数中起到了什么作用？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "实现一个上传 PDF 并基于内容回答的 RAG 应用，如果要求引用原文页码并支持混合检索，LangChain 和 LlamaIndex 分别怎么实现？你会选择哪",
+    "gold": "实现一个上传 PDF 并基于内容回答的 RAG 应用，如果要求引用原文页码并支持混合检索，LangChain 和 LlamaIndex 分别怎么实现？你会选择哪",
+    "domain": "framework",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在一个实时欺诈检测系统中，每天新增10万交易，其中欺诈交易约50笔。你需要设计一个在线评估流程。请问：1. 为什么不能仅依赖离线历史数据的测试集评估？2. 如何",
+    "gold": "在一个实时欺诈检测系统中，每天新增10万交易，其中欺诈交易约50笔。你需要设计一个在线评估流程。请问：1. 为什么不能仅依赖离线历史数据的测试集评估？2. 如何",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "编程题：交叉链表求交点",
+    "gold": "编程题：交叉链表求交点",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在 FastAPI 的 async def 接口中直接调用同步 OpenAI SDK（或 requests）获取模型结果，压测时发现吞吐很低，且同一服务里其他接",
+    "gold": "在 FastAPI 的 async def 接口中直接调用同步 OpenAI SDK（或 requests）获取模型结果，压测时发现吞吐很低，且同一服务里其他接",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "请你先解释一下，什么是自我修正/自我批评式 Prompt？它的核心思想是什么？",
+    "gold": "请你先解释一下，什么是自我修正/自我批评式 Prompt？它的核心思想是什么？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "LangChain 新版将 ConversationalRetrievalChain 标记为 deprecated，并推荐使用 LangGraph 构建检索问答",
+    "gold": "LangChain 新版将 ConversationalRetrievalChain 标记为 deprecated，并推荐使用 LangGraph 构建检索问答",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "假设你要为一份包含合同条款、表格和签名的 PDF 搭建 RAG 检索，你会如何选择文本分割策略？请说明决策依据和可能踩的坑。",
+    "gold": "假设你要为一份包含合同条款、表格和签名的 PDF 搭建 RAG 检索，你会如何选择文本分割策略？请说明决策依据和可能踩的坑。",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "为什么Adam常常打不过SGD？症结点与改善方案？",
+    "gold": "为什么Adam常常打不过SGD？症结点与改善方案？",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在迁移学习中，对比‘冻结骨干网络仅训练分类头’与‘全模型微调（Fine-tuning）’两种策略。请从模型容量、过拟合风险及计算成本三个维度分析它们的适用场景，",
+    "gold": "在迁移学习中，对比‘冻结骨干网络仅训练分类头’与‘全模型微调（Fine-tuning）’两种策略。请从模型容量、过拟合风险及计算成本三个维度分析它们的适用场景，",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "线上向量库集群当前内存使用率已达 80%，写入 QPS 还在增长，预计数据量 3 个月后翻倍。请设计一套容量规划、监控告警和平滑扩容方案，避免发生内存 OOM",
+    "gold": "线上向量库集群当前内存使用率已达 80%，写入 QPS 还在增长，预计数据量 3 个月后翻倍。请设计一套容量规划、监控告警和平滑扩容方案，避免发生内存 OOM",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "选型题：Docker 容器、gVisor、Firecracker microVM、Wasm 都有人用来跑 Agent 生成代码。假设你要跑多租户 LLM 生成的",
+    "gold": "选型题：Docker 容器、gVisor、Firecracker microVM、Wasm 都有人用来跑 Agent 生成代码。假设你要跑多租户 LLM 生成的",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "什么样的数据适合做分区键，什么不适合？请从基数和查询模式两个角度给出正反例子。",
+    "gold": "什么样的数据适合做分区键，什么不适合？请从基数和查询模式两个角度给出正反例子。",
+    "domain": "vectordb",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "如果业务要求模型同时提升有用性、安全性和格式遵循，但只有单卡或少量标注，你会如何设计DPO与RLHF混合方案？",
+    "gold": "如果业务要求模型同时提升有用性、安全性和格式遵循，但只有单卡或少量标注，你会如何设计DPO与RLHF混合方案？",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "A weekend-project cooking assistant should double-check facts like safe cooking",
+    "gold": "A weekend-project cooking assistant should double-check facts like safe cooking",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "What is the research origin of Agentic RAG, and how did it evolve from ReAct and",
+    "gold": "What is the research origin of Agentic RAG, and how did it evolve from ReAct and",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "请简要描述过拟合和欠拟合在训练集与验证集误差上的典型表现特征，并说明如何直观判断当前模型处于哪种状态？",
+    "gold": "请简要描述过拟合和欠拟合在训练集与验证集误差上的典型表现特征，并说明如何直观判断当前模型处于哪种状态？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "我们在做企业知识库问答，经常遇到模型把正常合规问题也拒答，导致客服投诉。你会怎么设计一套可配置的拒答机制，既满足安全对齐又降低误拒？请结合生产落地讲。",
+    "gold": "我们在做企业知识库问答，经常遇到模型把正常合规问题也拒答，导致客服投诉。你会怎么设计一套可配置的拒答机制，既满足安全对齐又降低误拒？请结合生产落地讲。",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "什么是 asyncio 事件循环？它在异步程序中主要解决什么问题？",
+    "gold": "什么是 asyncio 事件循环？它在异步程序中主要解决什么问题？",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "你在实现 ReAct 循环时，除了 max_steps 还会设置哪些终止/熔断条件？如果工具返回报错、空结果或超长 observation，你怎么处理，避免死循",
+    "gold": "你在实现 ReAct 循环时，除了 max_steps 还会设置哪些终止/熔断条件？如果工具返回报错、空结果或超长 observation，你怎么处理，避免死循",
+    "domain": "agent",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在 ColBERT 检索中，每 query token 的 ANN top-k、文档最大 token 长度 L、以及 token 向量量化精度是常见调参项。请分",
+    "gold": "在 ColBERT 检索中，每 query token 的 ANN top-k、文档最大 token 长度 L、以及 token 向量量化精度是常见调参项。请分",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "设计LLM工具调用的参数schema时，有同事把参数定义成 dict[str, Any] 或一个包含十几种模型的大 Union。从性能和可维护性角度看有什么坑？",
+    "gold": "设计LLM工具调用的参数schema时，有同事把参数定义成 dict[str, Any] 或一个包含十几种模型的大 Union。从性能和可维护性角度看有什么坑？",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在分布式存储系统中，RDMA（远程直接内存访问）也被归类为广义零拷贝。请解释RDMA如何实现主机间通信而不占用CPU和操作系统栈，并指出其在实际部署中最常见的瓶",
+    "gold": "在分布式存储系统中，RDMA（远程直接内存访问）也被归类为广义零拷贝。请解释RDMA如何实现主机间通信而不占用CPU和操作系统栈，并指出其在实际部署中最常见的瓶",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "Which question is best served by decompose-then-retrieve with sub-queries run in",
+    "gold": "Which question is best served by decompose-then-retrieve with sub-queries run in",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "线上经常出现模型编造不存在的库函数、乱加依赖、不遵守项目分层。你会用哪些 prompt 技巧和工程手段一起降低这类幻觉？",
+    "gold": "线上经常出现模型编造不存在的库函数、乱加依赖、不遵守项目分层。你会用哪些 prompt 技巧和工程手段一起降低这类幻觉？",
+    "domain": "prompt",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "向量库有 replica_number 和多个 query node，一致性级别会怎样影响副本选择、负载均衡和故障切换？生产上怎么选？",
+    "gold": "向量库有 replica_number 和多个 query node，一致性级别会怎样影响副本选择、负载均衡和故障切换？生产上怎么选？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "固定长度分块怎么实现？关键参数和优缺点是什么？",
+    "gold": "固定长度分块怎么实现？关键参数和优缺点是什么？",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "Function Schema 描述是不是越详细越好？详细会增加 token 和延迟。你在生产里如何决定给模型多少描述？请给出分层设计和权衡标准。",
+    "gold": "Function Schema 描述是不是越详细越好？详细会增加 token 和延迟。你在生产里如何决定给模型多少描述？请给出分层设计和权衡标准。",
+    "domain": "prompt",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在向量库备份恢复后，使用标量过滤查询结果与备份前不一致，可能是什么原因？如何设计备份方案避免这类问题？",
+    "gold": "在向量库备份恢复后，使用标量过滤查询结果与备份前不一致，可能是什么原因？如何设计备份方案避免这类问题？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "假设你用 Pydantic 定义了一个结构，比如 class User(BaseModel): name: str; age: int; email: Emai",
+    "gold": "假设你用 Pydantic 定义了一个结构，比如 class User(BaseModel): name: str; age: int; email: Emai",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "你们的项目正从 LangChain 0.0.x 升级到 0.2/0.3，代码里大量使用了 LLMChain、StuffDocumentsChain 和 Conv",
+    "gold": "你们的项目正从 LangChain 0.0.x 升级到 0.2/0.3，代码里大量使用了 LLMChain、StuffDocumentsChain 和 Conv",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "工具调用前审批和执行后审计+回滚，你怎么选？请以查数据库、写数据库、发邮件、调用外部支付为例，说明风险评分、幂等性和回滚能力如何影响介入点。",
+    "gold": "工具调用前审批和执行后审计+回滚，你怎么选？请以查数据库、写数据库、发邮件、调用外部支付为例，说明风险评分、幂等性和回滚能力如何影响介入点。",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "你在一个AI应用项目中使用LangChain快速搭建了RAG问答链，但团队担心框架锁定。请从可测试性、可迁移性和版本升级三个角度说明直接用LangChain高级",
+    "gold": "你在一个AI应用项目中使用LangChain快速搭建了RAG问答链，但团队担心框架锁定。请从可测试性、可迁移性和版本升级三个角度说明直接用LangChain高级",
+    "domain": "framework",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在高性能网络IO中，传统read/write模型涉及多次数据拷贝和上下文切换。请解释零拷贝（Zero-Copy）如何通过sendfile系统调用解决这一问题？并",
+    "gold": "在高性能网络IO中，传统read/write模型涉及多次数据拷贝和上下文切换。请解释零拷贝（Zero-Copy）如何通过sendfile系统调用解决这一问题？并",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "nlist 这个参数到底在权衡什么？如果我把 nlist 从 100 调到 10000，索引构建、内存、查询延迟和召回率分别会怎么变？实际怎么选？",
+    "gold": "nlist 这个参数到底在权衡什么？如果我把 nlist 从 100 调到 10000，索引构建、内存、查询延迟和召回率分别会怎么变？实际怎么选？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "如果用户输入本身包含你选用的分隔符，比如 <user_input>，你如何处理以避免边界被破坏？",
+    "gold": "如果用户输入本身包含你选用的分隔符，比如 <user_input>，你如何处理以避免边界被破坏？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "假设有一个电商下单接口，涉及库存扣减和订单创建两个步骤。如果在 MySQL 中使用 SERIALIZABLE（串行化）隔离级别，虽然能彻底杜绝并发问题，但生产环",
+    "gold": "假设有一个电商下单接口，涉及库存扣减和订单创建两个步骤。如果在 MySQL 中使用 SERIALIZABLE（串行化）隔离级别，虽然能彻底杜绝并发问题，但生产环",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "What is the cost and latency overhead of tree decoding at scale?",
+    "gold": "What is the cost and latency overhead of tree decoding at scale?",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "Raising the Leiden resolution parameter in a Graph RAG index will most likely ha",
+    "gold": "Raising the Leiden resolution parameter in a Graph RAG index will most likely ha",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在什么情况下 InnoDB 会退化为表锁或升级为间隙锁？请结合唯一索引和非唯一索引的区别进行说明。",
+    "gold": "在什么情况下 InnoDB 会退化为表锁或升级为间隙锁？请结合唯一索引和非唯一索引的区别进行说明。",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "带 metadata filter 的向量检索在 HNSW 上经常效果很差，尤其是高选择性过滤。请讲清楚 pre-filter、post-filter、inli",
+    "gold": "带 metadata filter 的向量检索在 HNSW 上经常效果很差，尤其是高选择性过滤。请讲清楚 pre-filter、post-filter、inli",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "CoT 和 Self-Consistency 是什么关系？为什么 SC 通常要采样 temperature>0 后投票，而不是直接用 greedy？哪些情况下",
+    "gold": "CoT 和 Self-Consistency 是什么关系？为什么 SC 通常要采样 temperature>0 后投票，而不是直接用 greedy？哪些情况下",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "如果你拿到 100 万条开源 SFT 指令数据，如何设计清洗过滤流水线？为什么去重和评测集泄漏检查要优先做？",
+    "gold": "如果你拿到 100 万条开源 SFT 指令数据，如何设计清洗过滤流水线？为什么去重和评测集泄漏检查要优先做？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "作为 AI 实习生，你需要为一个实时性要求极高的在线推理服务准备预训练模型。团队希望缩短训练时间，但你发现强行压缩 Warmup 阶段（如从 1000 步减至",
+    "gold": "作为 AI 实习生，你需要为一个实时性要求极高的在线推理服务准备预训练模型。团队希望缩短训练时间，但你发现强行压缩 Warmup 阶段（如从 1000 步减至",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "假设embedding各维近似独立且服从标准正态分布，256位二进制向量由sign(x)得到。请问cosine similarity=0.9时，汉明距离的理论期",
+    "gold": "假设embedding各维近似独立且服从标准正态分布，256位二进制向量由sign(x)得到。请问cosine similarity=0.9时，汉明距离的理论期",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "模型推理：大模型训练及微调的显存占用情况？",
+    "gold": "模型推理：大模型训练及微调的显存占用情况？",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "当类别不均衡、样例质量参差，或者出现新类别时，few-shot 样例怎么维护？会不会越选越偏？",
+    "gold": "当类别不均衡、样例质量参差，或者出现新类别时，few-shot 样例怎么维护？会不会越选越偏？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "我们有一个RAG客服，检索已经命中了正确文档，但模型还是经常编造不存在的退款条款。作为面试官，我想听你从数据、检索、提示词、解码和模型本身逐层定位，给出你的排查",
+    "gold": "我们有一个RAG客服，检索已经命中了正确文档，但模型还是经常编造不存在的退款条款。作为面试官，我想听你从数据、检索、提示词、解码和模型本身逐层定位，给出你的排查",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "如果让你设计 PQ 的离线评测和线上监控，覆盖压缩率、召回率、延迟，你会怎么设计实验？线上怎么发现精度损失？",
+    "gold": "如果让你设计 PQ 的离线评测和线上监控，覆盖压缩率、召回率、延迟，你会怎么设计实验？线上怎么发现精度损失？",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "How do you balance relevance and diversity when retrieving document chunks for R",
+    "gold": "How do you balance relevance and diversity when retrieving document chunks for R",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "除了全局 max_steps，你怎么检测 Agent 在两个工具之间来回调用或重复相同动作？请给出可落地的检测信号和伪代码。",
+    "gold": "除了全局 max_steps，你怎么检测 Agent 在两个工具之间来回调用或重复相同动作？请给出可落地的检测信号和伪代码。",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "你能先通俗解释一下什么是 Prompt 注入攻击吗？它和 SQL 注入在思路上有什么相似和不同？",
+    "gold": "你能先通俗解释一下什么是 Prompt 注入攻击吗？它和 SQL 注入在思路上有什么相似和不同？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "What is the research and practical origin of \"Modular RAG\" as a term?",
+    "gold": "What is the research and practical origin of \"Modular RAG\" as a term?",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "你在 LangGraph 里设计一个可中断、可恢复的客服 Agent 时，State 会怎么定义？哪些字段必须加 reducer？怎么避免多节点并发写导致覆盖？",
+    "gold": "你在 LangGraph 里设计一个可中断、可恢复的客服 Agent 时，State 会怎么定义？哪些字段必须加 reducer？怎么避免多节点并发写导致覆盖？",
+    "domain": "agent",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "为什么在AI应用开发中，直接深度使用某个应用框架（如LangChain、LlamaIndex）的内部组件会带来维护风险？请从迁移成本和升级成本两个角度说明。",
+    "gold": "为什么在AI应用开发中，直接深度使用某个应用框架（如LangChain、LlamaIndex）的内部组件会带来维护风险？请从迁移成本和升级成本两个角度说明。",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "系统提示词一般包含哪些组成部分？为什么不把角色、安全、格式等要求都写在用户提示词里？",
+    "gold": "系统提示词一般包含哪些组成部分？为什么不把角色、安全、格式等要求都写在用户提示词里？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "在微服务架构中，如果下游服务响应变慢导致 TCP 连接建立大量 TIME_WAIT，同时应用层出现严重的背压（Backpressure）堆积，请分析拥塞控制与流",
+    "gold": "在微服务架构中，如果下游服务响应变慢导致 TCP 连接建立大量 TIME_WAIT，同时应用层出现严重的背压（Backpressure）堆积，请分析拥塞控制与流",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在大型语言模型 (llms) 中减少幻觉的策略有哪些？",
+    "gold": "在大型语言模型 (llms) 中减少幻觉的策略有哪些？",
+    "domain": "llm_basics",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "在微服务间 RPC 调用场景中，为什么我们通常不建议在业务代码中手动管理 TCP 连接的三次握手细节，而是倾向于使用连接池？请从延迟敏感性和资源利用率两个维度深",
+    "gold": "在微服务间 RPC 调用场景中，为什么我们通常不建议在业务代码中手动管理 TCP 连接的三次握手细节，而是倾向于使用连接池？请从延迟敏感性和资源利用率两个维度深",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "在封装一个AI推理服务时，你会把推理逻辑写成普通方法 `predict()` 还是实现 `__call__` 让实例可调用？请结合状态管理、接口统一和可组合性说",
+    "gold": "在封装一个AI推理服务时，你会把推理逻辑写成普通方法 `predict()` 还是实现 `__call__` 让实例可调用？请结合状态管理、接口统一和可组合性说",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "很多人把 overlap 设成 20% 就觉得万事大吉。请说说 overlap 过大和过小在生产中分别会踩哪些坑，你会用什么指标和实验确定 overlap，而不",
+    "gold": "很多人把 overlap 设成 20% 就觉得万事大吉。请说说 overlap 过大和过小在生产中分别会踩哪些坑，你会用什么指标和实验确定 overlap，而不",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "A"
+  },
+  {
+    "query": "子代理和主代理的工具、记忆、凭证应该共享还是隔离？如果隔离，如何做到既安全又不影响完成任务？",
+    "gold": "子代理和主代理的工具、记忆、凭证应该共享还是隔离？如果隔离，如何做到既安全又不影响完成任务？",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "What is Streaming / Real-Time RAG and what problem does it solve?",
+    "gold": "What is Streaming / Real-Time RAG and what problem does it solve?",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "Python中重载",
+    "gold": "Python中重载",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "如果一个固定工作流里也调用了 LLM，甚至有多步 LLM 调用，它还算固定工作流吗？和 Agent 的边界在哪里？",
+    "gold": "如果一个固定工作流里也调用了 LLM，甚至有多步 LLM 调用，它还算固定工作流吗？和 Agent 的边界在哪里？",
+    "domain": "agent",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "如果业务要求最终必须返回严格 JSON，但中间又需要复杂推理，你会怎么设计 prompt？CoT 把 JSON 搞坏了怎么处理？",
+    "gold": "如果业务要求最终必须返回严格 JSON，但中间又需要复杂推理，你会怎么设计 prompt？CoT 把 JSON 搞坏了怎么处理？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "A"
+  },
+  {
+    "query": "在微服务架构中，为什么通常推荐使用 L7 负载均衡而非 L4？请列举两个关键优势。",
+    "gold": "在微服务架构中，为什么通常推荐使用 L7 负载均衡而非 L4？请列举两个关键优势。",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "A"
+  },
+  {
+    "query": "我最近想做个状态机风格的 Agent，听说可以用 LangGraph，它到底是干嘛的，能帮我解决哪些麻烦？",
+    "gold": "你能先简单说一下，LangGraph 是什么？在实现状态机式 Agent 时，它主要解决什么问题？",
+    "domain": "agent",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我面试时被问到 HTTPS 里的 TLS 握手到底要完成什么事，为啥还要把非对称加密和对称加密混在一起用，能通俗讲讲吗",
+    "gold": "请简述 HTTPS 中 TLS 握手阶段的核心目标，并说明为什么需要引入非对称加密与对称加密的混合机制？",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "项目里正样本特别少，跟SMOTE这种过采样比，用代价敏感学习去训XGBoost或LightGBM有啥优势？",
+    "gold": "相比过采样（如SMOTE），代价敏感学习（Cost-Sensitive Learning）在处理极端不平衡数据时有何优势？请结合XGBoost/LightGBM",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做垂直领域模型微调时，训练用的指令和数据输入一般要按什么格式来准备？",
+    "gold": "领域模型微调 指令\\&数据输入格式 要求？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里做全模型微调后发现新数据效果是上去了，但旧类别和原来预训练任务反而变差了，这种灾难性遗忘到底是怎么回事？",
+    "gold": "在进行全模型微调（Full Fine-tuning）时，经常遇到‘灾难性遗忘’现象，即模型在新数据上表现提升，但在旧类别或原始预训练任务上的泛化能力下降。请解释",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在准备大模型岗位面试，想问下百川 7B 这块一般会考察哪些内容？",
+    "gold": "一、baichuan-7B篇？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "多个 Agent 一起协作时如果互相抢任务或者结论打架，一般该怎么协调处理？",
+    "gold": "多智能体冲突解决",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里想加自动执行能力，LLM 和 Agent 到底是不是一回事，差别在哪？",
+    "gold": "Agent和LLM有什么区别",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "想了解一下层归一化跟其他归一化方法相比主要差在哪？",
+    "gold": "Layer normalization 对比篇？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我用 async def 写了个函数，直接调用后怎么没执行，它跟普通函数到底差在哪，返回的是个什么东西？",
+    "gold": "async def 定义的协程函数和普通函数有什么区别？调用它时返回什么？",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我项目里要做分库分表，分布式 ID 为啥不太适合用数据库自增或者 UUID，Snowflake 和 Redis INCR 这两种方案生成性能差别大吗？",
+    "gold": "在分库分表场景下，为什么通常不建议使用数据库自增主键或 UUID 作为分布式 ID？请对比雪花算法（Snowflake）和 Redis INCR 方案在生成性能",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我这边数据类别差得特别离谱，难例又多，想把 class weights 和 focal loss 一起用，怎么搭配会比较合理？",
+    "gold": "在处理极端类别不平衡且存在大量难分样本的数据集时，你会如何组合使用 Focal Loss 和 Class Weights？请说明理由。",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在搭一个电商售后助手，像退货政策咨询、查订单状态、提交退款申请这些能力，哪些适合写成固定 Chain，哪些更适合交给 Agent，还有 Retriever 和 T 该怎么配合？",
+    "gold": "请设计一个电商售后助手，需求包括：退货政策问答、订单状态查询、退款申请提交。请说明哪些部分你会用固定 Chain、哪些用 Agent、Retriever 和 T",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在生产里用 Redis Cluster，为啥大家更推荐 JedisCluster 这种客户端分片而不是走代理，另外主从切换时客户端怎么保证还能正常读写？",
+    "gold": "在生产环境中，为什么通常建议对 Redis Cluster 使用客户端分片（如 JedisCluster）而不是代理模式？如果集群节点发生主从切换，客户端如何保",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "如果我想评估 CRAG 检索的鲁棒性，攻击者一般会怎么设计恶意 query 来让它召回错误内容？",
+    "gold": "How can adversaries craft queries specifically designed to fool CRAG's retrieval",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在准备面试，想搞懂红黑树到底是怎么保持平衡的",
+    "gold": "数据结构：红黑树",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里用过让模型自己反思并修改输出的那种 prompt，想知道这类自我修正式提示词容易踩哪些坑，哪些场景其实不太适合用？",
+    "gold": "自我修正式 Prompt 有什么局限或风险？什么情况下不适合用？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里做AI推荐系统，用户历史行为向量有几KB大，很少更新但读取特别频繁，这种缓存策略该怎么设计才能避免缓存击穿？",
+    "gold": "在开发AI应用推荐系统时，我们需要缓存用户的历史行为向量。如果向量数据较大（KB级别），且更新频率较低，但读取极高频。在这种场景下，如何设计缓存策略以避免‘缓存",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做多 Agent 的 Supervisor 模式，经常遇到子任务被派错或者一直来回循环，想问下如果要避免这种问题，prompt、输出协议、状态机和运行时护栏这块一般该怎么设计？",
+    "gold": "Supervisor 模式最容易出现错误路由和无限循环。你会在 prompt、输出协议、状态机和运行时护栏上怎么设计？",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里碰到线上服务时不时超时，怀疑某个 async def 视图里调了同步阻塞逻辑，有没有最简单的办法量化事件循环被阻塞的程度并定位到具体代码路径？",
+    "gold": "线上服务偶发超时，你怀疑某个 `async def` 视图中存在同步阻塞调用。请设计一个最小诊断方案，量化事件循环阻塞程度并定位到具体路径。",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里封装一个统一的向量存储接口，碰到不同底层库会有限流、超时还有批量写一半失败的情况，想问下接口层该怎么区分错误、设计重试和返回部分失败结果，才能不把底层 SDK 的细节暴露给业务？",
+    "gold": "统一向量存储接口在生产环境会遇到不同库的限流、超时和批量部分写入失败。你会如何在接口层设计错误分类、重试策略和部分失败返回，避免把底层 SDK 的细节泄漏给业务",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里想给LangChain加个自定义工具，那个Tool抽象主要是干嘛的，自己实现时一般得提供哪些东西？",
+    "gold": "LangChain中的Tool抽象是干什么的？如果要实现一个自定义工具，需要提供哪些关键信息？",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里发现备份经常把 CPU 和磁盘打满，存储费用也越来越高，想问下你们一般怎么平衡备份效率、恢复时长和成本，有没有实际例子？",
+    "gold": "备份任务会占用 CPU/IO，且存储成本随数据量增长。你会通过哪些策略在备份性能、恢复速度和成本之间做权衡？请举例说明。",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做词向量相关项目，想问下 GloVe 是怎么把全局共现统计和局部上下文结合起来的，损失函数里的 V_ij 具体表示什么，f(x) 这样设计想解决什么问题，为啥它通常比只看局部窗口的方法效果更好？",
+    "gold": "GloVe 模型试图融合计数统计与局部上下文信息，请解释其损失函数中 $V_{ij}$ 的含义及权重函数 $f(x)$ 的设计意图。为什么 GloVe 通常比",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我项目里遇到Python对象好像没释放，想问下GC里的引用计数到底怎么运作，哪些常见操作会让计数变多或变少？",
+    "gold": "请介绍一下Python GC中引用计数机制的基本原理，并说明哪些典型操作会增加或减少引用计数。",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里发现向量库经常要把 embedding、元数据字段和原始文本一起管理，这跟传统 OLTP 的存储设计到底差在哪，能不能从 WAL、LSM、段合并还有 mmap 这些角度讲讲？",
+    "gold": "向量数据库的存储引擎为什么通常要同时管理向量、元数据和原始文本？它和传统 OLTP 存储设计有什么不同？请从 WAL、LSM、段合并、mmap 角度说明。",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里拿预训练模型做迁移学习，结果微调时验证loss越跑越高，这一般是什么原因，该怎么调？",
+    "gold": "如果在微调过程中发现验证集Loss不降反升，可能的原因有哪些？针对迁移学习场景，你会如何调整？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我们线上偏好老是变，还想让模型多试试新回复，这种情况下 RLHF 和 DPO 的优化机制差别大吗，训练流程该怎么排？",
+    "gold": "DPO 和 RLHF 在优化方式上有本质区别吗？如果业务偏好持续变化，并且需要模型探索新回答，你会怎么设计训练流程？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做 AI 模板渲染，用户内容里经常出现 {{ }}、{% %} 或者“忽略以上指令”这种东西，变量填充时该怎么设计才能避免模板注入和 Prompt 注入？",
+    "gold": "如果用户输入可能包含类似 {{ }}、{% %} 或“忽略以上指令”的内容，你的模板化和变量插值方案如何防止模板注入和 Prompt 注入？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做一个只有8k上下文的RAG客服，想知道系统提示、检索片段、历史对话、当前问题和输出预留这几块该怎么分token，有没有推荐的初始比例和动态调整思路，为啥不能把比例写死？",
+    "gold": "在8k上下文的RAG客服中，system prompt、检索片段、多轮历史、当前用户输入和输出预留，你会怎么分预算？给初始比例和动态调整规则，并解释为什么不是固",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里写脚本批量调大模型，用 for 循环给每条数据建日志回调，结果回调里全打印最后一个 sample_id，这是闭包延迟绑定导致的吗？",
+    "gold": "在批量调用大模型API的脚本里，你用 for 循环为每个样本创建日志回调闭包，但运行时所有回调都打印了最后一个 sample_id。请解释闭包 late bin",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里要用 LangGraph 做 interrupt 人机协同，一般最少得搭哪些模块，它们分别是干嘛的？",
+    "gold": "实现一次典型的 LangGraph interrupt 人机协同，至少需要哪些核心组件？请分别说明作用。",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我调模型时容易过拟合，想问问 L2 正则或者 weight decay 是怎么限制权重别太大，加到损失函数里后对优化有什么影响？",
+    "gold": "L2 正则化（Weight Decay）是如何约束模型参数以防止过拟合的？它在优化目标函数中起到了什么作用？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在做一个 PDF 问答助手，想让回答能标注来源页码，同时支持向量和关键词混合检索，这种情况下 LangChain 和 LlamaIndex 各自怎么做，你会更推荐哪个？",
+    "gold": "实现一个上传 PDF 并基于内容回答的 RAG 应用，如果要求引用原文页码并支持混合检索，LangChain 和 LlamaIndex 分别怎么实现？你会选择哪",
+    "domain": "framework",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做实时反欺诈系统，每天大概十万笔交易里只有五十笔欺诈，想问下为啥不能只拿历史离线测试集看效果，线上该怎么搭评估流程？",
+    "gold": "在一个实时欺诈检测系统中，每天新增10万交易，其中欺诈交易约50笔。你需要设计一个在线评估流程。请问：1. 为什么不能仅依赖离线历史数据的测试集评估？2. 如何",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到两个链表后面合并到一起的情况，怎么找到它们开始相交的那个节点",
+    "gold": "编程题：交叉链表求交点",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在 FastAPI 的 async def 路由里直接用了同步的 OpenAI SDK 或 requests，结果压测吞吐上不去，还把同一个服务里的别的接口也拖慢了，这是不是把事件循环阻塞了，该怎么改？",
+    "gold": "在 FastAPI 的 async def 接口中直接调用同步 OpenAI SDK（或 requests）获取模型结果，压测时发现吞吐很低，且同一服务里其他接",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做智能体时想让模型自己挑错再改，这种自我修正或自我批评式 Prompt 的核心思路到底该怎么理解？",
+    "gold": "请你先解释一下，什么是自我修正/自我批评式 Prompt？它的核心思想是什么？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "LangChain 新版里 ConversationalRetrievalChain 都废弃了，现在做检索问答是不是直接上 LangGraph 更合适？",
+    "gold": "LangChain 新版将 ConversationalRetrievalChain 标记为 deprecated，并推荐使用 LangGraph 构建检索问答",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "项目里要给带条款、表格和签名的 PDF 做 RAG，我该怎么定文本切分策略，依据是什么，容易踩哪些坑？",
+    "gold": "假设你要为一份包含合同条款、表格和签名的 PDF 搭建 RAG 检索，你会如何选择文本分割策略？请说明决策依据和可能踩的坑。",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在训练模型时发现Adam有时候效果还不如SGD，主要是什么原因，有什么改进办法？",
+    "gold": "为什么Adam常常打不过SGD？症结点与改善方案？",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我项目里做迁移学习时有点纠结，想问下冻住骨干只训分类头和整个模型 fine-tune 该怎么选，结合模型容量、过拟合风险和计算成本看分别适合什么场景？",
+    "gold": "在迁移学习中，对比‘冻结骨干网络仅训练分类头’与‘全模型微调（Fine-tuning）’两种策略。请从模型容量、过拟合风险及计算成本三个维度分析它们的适用场景，",
+    "domain": "ml_dl",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到向量库集群内存已经用到 80%，写入 QPS 还一直在涨，三个月后数据量预计翻倍，该怎么提前做容量规划、监控告警和平滑扩容，避免后面出现内存 OOM？",
+    "gold": "线上向量库集群当前内存使用率已达 80%，写入 QPS 还在增长，预计数据量 3 个月后翻倍。请设计一套容量规划、监控告警和平滑扩容方案，避免发生内存 OOM",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "如果我要给多个租户运行 LLM Agent 自动生成的代码，用 Docker、gVisor、Firecracker microVM 还是 Wasm 更合适？",
+    "gold": "选型题：Docker 容器、gVisor、Firecracker microVM、Wasm 都有人用来跑 Agent 生成代码。假设你要跑多租户 LLM 生成的",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我项目里在给大表选分区键，想问如果从查询过滤方式和基数大小来看，哪些字段适合、哪些不适合，有没有正反例子？",
+    "gold": "什么样的数据适合做分区键，什么不适合？请从基数和查询模式两个角度给出正反例子。",
+    "domain": "vectordb",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里只有一张卡而且标注数据很少，想让模型同时更有用、更安全还更听格式指令，该怎么把DPO和RLHF结合起来做？",
+    "gold": "如果业务要求模型同时提升有用性、安全性和格式遵循，但只有单卡或少量标注，你会如何设计DPO与RLHF混合方案？",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我周末做了个做菜助手，想问下怎么让它回答前先核对安全烹饪这类事实信息？",
+    "gold": "A weekend-project cooking assistant should double-check facts like safe cooking",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我最近在看 Agentic RAG，想问一下它最早的研究脉络是什么，跟 ReAct 这些工作是怎么一步步演进过来的？",
+    "gold": "What is the research origin of Agentic RAG, and how did it evolve from ReAct and",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我项目里想看训练集和验证集的误差变化，怎么判断模型现在是过拟合还是欠拟合？",
+    "gold": "请简要描述过拟合和欠拟合在训练集与验证集误差上的典型表现特征，并说明如何直观判断当前模型处于哪种状态？",
+    "domain": "ml_dl",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我们企业知识库问答老把正常问题拒掉，客服都被投诉了，想问怎么在生产里做一套可配置的拒答策略，兼顾安全对齐和降低误拒？",
+    "gold": "我们在做企业知识库问答，经常遇到模型把正常合规问题也拒答，导致客服投诉。你会怎么设计一套可配置的拒答机制，既满足安全对齐又降低误拒？请结合生产落地讲。",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在写 Python 异步代码时经常碰到 asyncio 的事件循环，它到底是干嘛的，主要能解决什么问题？",
+    "gold": "什么是 asyncio 事件循环？它在异步程序中主要解决什么问题？",
+    "domain": "python_backend",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里跑 ReAct 循环时，除了限制最大步数，还会加哪些退出或熔断策略来处理工具报错、空返回和 observation 太长，避免一直循环？",
+    "gold": "你在实现 ReAct 循环时，除了 max_steps 还会设置哪些终止/熔断条件？如果工具返回报错、空结果或超长 observation，你怎么处理，避免死循",
+    "domain": "agent",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里调 ColBERT 检索，想问下每个 query token 的 ANN top-k、文档最大 token 长度 L 和 token 向量量化精度一般该怎么选？",
+    "gold": "在 ColBERT 检索中，每 query token 的 ANN top-k、文档最大 token 长度 L、以及 token 向量量化精度是常见调参项。请分",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做 LLM 工具调用时，看到参数 schema 被写成 dict[str, Any] 或者塞了十几种模型的大 Union，这对性能和可维护性会有啥隐患？",
+    "gold": "设计LLM工具调用的参数schema时，有同事把参数定义成 dict[str, Any] 或一个包含十几种模型的大 Union。从性能和可维护性角度看有什么坑？",
+    "domain": "python_backend",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做分布式存储时听说 RDMA 也算一种零拷贝，想问它是怎么绕过 CPU 和内核协议栈在两台机器间传数据的，实际落地一般卡在哪？",
+    "gold": "在分布式存储系统中，RDMA（远程直接内存访问）也被归类为广义零拷贝。请解释RDMA如何实现主机间通信而不占用CPU和操作系统栈，并指出其在实际部署中最常见的瓶",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做 RAG 时想问，哪类问题更适合先用 decompose-then-retrieve 拆成几个 sub-queries 分别检索再汇总？",
+    "gold": "Which question is best served by decompose-then-retrieve with sub-queries run in",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我这边用大模型写业务代码时经常碰到它虚构函数、乱加依赖、不按项目分层来，想问下你会怎么把提示词策略和工程化约束结合起来减少这种幻觉？",
+    "gold": "线上经常出现模型编造不存在的库函数、乱加依赖、不遵守项目分层。你会用哪些 prompt 技巧和工程手段一起降低这类幻觉？",
+    "domain": "prompt",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我们向量库开了多个 query node 和 replica_number，想问下一致性级别会怎么影响选副本、负载均衡和故障切换，生产环境一般怎么配比较合适？",
+    "gold": "向量库有 replica_number 和多个 query node，一致性级别会怎样影响副本选择、负载均衡和故障切换？生产上怎么选？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做文档切分，想问下按固定长度切块一般怎么搞，主要调哪些参数，有什么优劣？",
+    "gold": "固定长度分块怎么实现？关键参数和优缺点是什么？",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里给模型写 function schema 时有点纠结，描述写太细怕 token 和延迟变高，写太简又怕调用不准，实际生产里一般怎么分层设计、按什么标准取舍？",
+    "gold": "Function Schema 描述是不是越详细越好？详细会增加 token 和延迟。你在生产里如何决定给模型多少描述？请给出分层设计和权衡标准。",
+    "domain": "prompt",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到向量数据库从备份恢复后，带标量过滤的查询结果和之前不一样，想问下这通常是什么导致的，备份方案该怎么设计才能避免这种情况？",
+    "gold": "在向量库备份恢复后，使用标量过滤查询结果与备份前不一致，可能是什么原因？如何设计备份方案避免这类问题？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里用 Pydantic 的 BaseModel 建了个 User，里面有 name、age 和 email，邮箱这种字段一般该怎么声明和校验？",
+    "gold": "假设你用 Pydantic 定义了一个结构，比如 class User(BaseModel): name: str; age: int; email: Emai",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在把项目从 LangChain 0.0.x 升到 0.2/0.3，代码里有一堆 LLMChain、StuffDocumentsChain 和 Conv 相关写法，应该怎么迁移比较稳？",
+    "gold": "你们的项目正从 LangChain 0.0.x 升级到 0.2/0.3，代码里大量使用了 LLMChain、StuffDocumentsChain 和 Conv",
+    "domain": "framework",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里给 Agent 接工具时不太确定哪些操作该先人工审批、哪些事后审计加回滚就行，像查数据库、写数据库、发邮件、发起外部支付，该怎么结合风险评分、幂等性和可回滚能力来决定介入点？",
+    "gold": "工具调用前审批和执行后审计+回滚，你怎么选？请以查数据库、写数据库、发邮件、调用外部支付为例，说明风险评分、幂等性和回滚能力如何影响介入点。",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里用LangChain搭了个RAG问答链，但担心被框架绑死，如果直接依赖它的高层封装，从测试、迁移和后续版本升级来看会有哪些坑？",
+    "gold": "你在一个AI应用项目中使用LangChain快速搭建了RAG问答链，但团队担心框架锁定。请从可测试性、可迁移性和版本升级三个角度说明直接用LangChain高级",
+    "domain": "framework",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在优化高并发服务时听说普通read/write会来回拷数据还频繁切内核，能不能讲讲sendfile这种零拷贝是怎么减少这些开销的？",
+    "gold": "在高性能网络IO中，传统read/write模型涉及多次数据拷贝和上下文切换。请解释零拷贝（Zero-Copy）如何通过sendfile系统调用解决这一问题？并",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在调向量检索时把 nlist 从 100 加到 10000，建索引、内存占用、查询耗时和召回会受什么影响，线上一般怎么定这个值？",
+    "gold": "nlist 这个参数到底在权衡什么？如果我把 nlist 从 100 调到 10000，索引构建、内存、查询延迟和召回率分别会怎么变？实际怎么选？",
+    "domain": "vectordb",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在拼提示词的时候，如果用户输入里刚好也出现了像 <user_input> 这种分隔标记，该怎么处理才不会把边界搞乱？",
+    "gold": "如果用户输入本身包含你选用的分隔符，比如 <user_input>，你如何处理以避免边界被破坏？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在做下单服务时发现扣库存和建订单要一起保证不出错，如果把 MySQL 调到 SERIALIZABLE 是不是就能解决并发，但线上会不会太慢，一般该咋处理？",
+    "gold": "假设有一个电商下单接口，涉及库存扣减和订单创建两个步骤。如果在 MySQL 中使用 SERIALIZABLE（串行化）隔离级别，虽然能彻底杜绝并发问题，但生产环",
+    "domain": "cs_basic",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我们线上大规模跑推理时，如果用 tree decoding，大概会多耗多少资源，延迟又会被拖慢多少？",
+    "gold": "What is the cost and latency overhead of tree decoding at scale?",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里建 Graph RAG 索引，如果把 Leiden 算法的 resolution 调大，一般会有什么影响？",
+    "gold": "Raising the Leiden resolution parameter in a Graph RAG index will most likely ha",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到锁表问题，想问下 InnoDB 什么时候行锁会变成表锁或者加出间隙锁，这跟唯一索引和非唯一索引有啥关系？",
+    "gold": "在什么情况下 InnoDB 会退化为表锁或升级为间隙锁？请结合唯一索引和非唯一索引的区别进行说明。",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里用 HNSW 做向量检索时，加上 metadata filter 后高选择性过滤效果特别差，想问下 pre-filter、post-filter 和 inline filter 分别是怎么处理的？",
+    "gold": "带 metadata filter 的向量检索在 HNSW 上经常效果很差，尤其是高选择性过滤。请讲清楚 pre-filter、post-filter、inli",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做推理任务时有点 confused，思维链和 self-consistency 到底是怎么配合的，为啥一般要把 temperature 调高多采样几条再投票，而不是直接 greedy 出一个答案，哪些场景适合这么做？",
+    "gold": "CoT 和 Self-Consistency 是什么关系？为什么 SC 通常要采样 temperature>0 后投票，而不是直接用 greedy？哪些情况下",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "最近要处理大概一百万条开源 SFT 指令数据，想搭一套清洗过滤 pipeline，为啥一般会先把去重和评测集泄漏排查搞定？",
+    "gold": "如果你拿到 100 万条开源 SFT 指令数据，如何设计清洗过滤流水线？为什么去重和评测集泄漏检查要优先做？",
+    "domain": "llm_basics",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在给一个低延迟在线推理服务做预训练模型，想加快训练，如果把 warmup 从 1000 步直接砍到很少会不会影响收敛和线上效果，有什么更稳的办法？",
+    "gold": "作为 AI 实习生，你需要为一个实时性要求极高的在线推理服务准备预训练模型。团队希望缩短训练时间，但你发现强行压缩 Warmup 阶段（如从 1000 步减至",
+    "domain": "ml_dl",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做向量检索时想请教下，如果embedding每维大概独立且是标准正态，再用sign量化成256位二进制，那么余弦相似度到0.9时汉明距离理论上大概会是多少？",
+    "gold": "假设embedding各维近似独立且服从标准正态分布，256位二进制向量由sign(x)得到。请问cosine similarity=0.9时，汉明距离的理论期",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到显存不够用，想问下大模型在训练、微调和推理时大概各会吃多少显存？",
+    "gold": "模型推理：大模型训练及微调的显存占用情况？",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里做 few-shot 时碰到正负样本差很多、有些样例很脏，还总冒出新类，这些支持集该怎么持续管理，会不会挑着挑着就带偏模型了？",
+    "gold": "当类别不均衡、样例质量参差，或者出现新类别时，few-shot 样例怎么维护？会不会越选越偏？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里做RAG客服，明明检索到了对的文档，模型还是会瞎编不存在的退款条款，能不能从数据、检索、提示词、解码到模型本身帮我一层层排查下？",
+    "gold": "我们有一个RAG客服，检索已经命中了正确文档，但模型还是经常编造不存在的退款条款。作为面试官，我想听你从数据、检索、提示词、解码和模型本身逐层定位，给出你的排查",
+    "domain": "llm_basics",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里想给 PQ 做一套评估方案，离线怎么测压缩率、召回和延迟，上线后又该怎么监控并及时发现精度变差？",
+    "gold": "如果让你设计 PQ 的离线评测和线上监控，覆盖压缩率、召回率、延迟，你会怎么设计实验？线上怎么发现精度损失？",
+    "domain": "vectordb",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我做RAG的时候发现检索回来的chunk虽然很相关但总重复，该怎么同时照顾相关性和多样性？",
+    "gold": "How do you balance relevance and diversity when retrieving document chunks for R",
+    "domain": "rag",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到 Agent 可能在两个工具之间来回打转或者重复执行同一个操作，除了限制总步数，还能看哪些可落地的信号来判断它卡循环了，能不能给段伪代码？",
+    "gold": "除了全局 max_steps，你怎么检测 Agent 在两个工具之间来回调用或重复相同动作？请给出可落地的检测信号和伪代码。",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做大模型应用时想搞清楚，Prompt 注入攻击到底是怎么钻空子的，它跟 SQL 注入在攻击思路上有哪些地方像、哪些地方不一样？",
+    "gold": "你能先通俗解释一下什么是 Prompt 注入攻击吗？它和 SQL 注入在思路上有什么相似和不同？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在做 RAG 项目时经常听到 Modular RAG 这个说法，它最早是怎么被提出来的，背后有哪些研究或工程实践来源？",
+    "gold": "What is the research and practical origin of \"Modular RAG\" as a term?",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "想问下做可以暂停继续的客服 agent 时，LangGraph 的 state 一般怎么组织，哪些字段要上 reducer，节点同时写的时候怎么防止状态被盖掉？",
+    "gold": "你在 LangGraph 里设计一个可中断、可恢复的客服 Agent 时，State 会怎么定义？哪些字段必须加 reducer？怎么避免多节点并发写导致覆盖？",
+    "domain": "agent",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "如果我们在 AI 应用里大量依赖 LangChain 或 LlamaIndex 的内部实现，之后想换方案或跟新版本会不会很麻烦，迁移成本和升级成本分别会高在哪？",
+    "gold": "为什么在AI应用开发中，直接深度使用某个应用框架（如LangChain、LlamaIndex）的内部组件会带来维护风险？请从迁移成本和升级成本两个角度说明。",
+    "domain": "framework",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里写 Prompt 时有点疑惑，系统提示词通常包含哪些模块，为什么角色设定、安全约束和输出格式这些要放在系统层而不是全塞进用户提示词？",
+    "gold": "系统提示词一般包含哪些组成部分？为什么不把角色、安全、格式等要求都写在用户提示词里？",
+    "domain": "prompt",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到微服务下游接口变慢后连接堆了很多 TIME_WAIT，应用层背压也上来了，想问这种情况该怎么从拥塞控制和流量控制的角度分析？",
+    "gold": "在微服务架构中，如果下游服务响应变慢导致 TCP 连接建立大量 TIME_WAIT，同时应用层出现严重的背压（Backpressure）堆积，请分析拥塞控制与流",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里用 LLM 生成内容时经常碰到模型编造事实，有啥办法能缓解这种幻觉问题？",
+    "gold": "在大型语言模型 (llms) 中减少幻觉的策略有哪些？",
+    "domain": "llm_basics",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里做微服务 RPC 调用时，为啥一般不在业务代码里自己处理 TCP 三次握手，而是用连接池，从延迟敏感和资源利用率看主要考虑是什么？",
+    "gold": "在微服务间 RPC 调用场景中，为什么我们通常不建议在业务代码中手动管理 TCP 连接的三次握手细节，而是倾向于使用连接池？请从延迟敏感性和资源利用率两个维度深",
+    "domain": "cs_basic",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里封装AI推理服务，不确定推理入口该用predict方法还是把类做成可调用对象，这对状态管理、接口统一和后面组合有什么影响？",
+    "gold": "在封装一个AI推理服务时，你会把推理逻辑写成普通方法 `predict()` 还是实现 `__call__` 让实例可调用？请结合状态管理、接口统一和可组合性说",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我们项目里把 overlap 设成 20% 就不管了，想问问真实上线时 overlap 太大或太小会踩什么坑，怎么通过指标和实验来选合适的 overlap？",
+    "gold": "很多人把 overlap 设成 20% 就觉得万事大吉。请说说 overlap 过大和过小在生产中分别会踩哪些坑，你会用什么指标和实验确定 overlap，而不",
+    "domain": "rag",
+    "difficulty": 3,
+    "tier": "B"
+  },
+  {
+    "query": "我在做多智能体项目时想问，主代理和子代理之间的工具、记忆、凭证到底该共用还是分开，如果分开怎么做才能既安全又不耽误任务完成？",
+    "gold": "子代理和主代理的工具、记忆、凭证应该共享还是隔离？如果隔离，如何做到既安全又不影响完成任务？",
+    "domain": "agent",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在做问答系统时遇到数据更新不及时的问题，想了解一下 Streaming 或 Real-Time RAG 主要是解决什么场景的？",
+    "gold": "What is Streaming / Real-Time RAG and what problem does it solve?",
+    "domain": "rag",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "Python 里函数能像 Java 那样重载吗，还是得用默认参数？",
+    "gold": "Python中重载",
+    "domain": "python_backend",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在项目里遇到那种流程写死但中间会多次调大模型的情况，这还能叫固定工作流吗，它跟 Agent 的界限到底在哪？",
+    "gold": "如果一个固定工作流里也调用了 LLM，甚至有多步 LLM 调用，它还算固定工作流吗？和 Agent 的边界在哪里？",
+    "domain": "agent",
+    "difficulty": 1,
+    "tier": "B"
+  },
+  {
+    "query": "我们项目里需要模型最终返回可解析的严格 JSON，但中间又要复杂推理，这种 prompt 怎么设计，CoT 把 JSON 弄坏了咋办？",
+    "gold": "如果业务要求最终必须返回严格 JSON，但中间又需要复杂推理，你会怎么设计 prompt？CoT 把 JSON 搞坏了怎么处理？",
+    "domain": "prompt",
+    "difficulty": 2,
+    "tier": "B"
+  },
+  {
+    "query": "我在给微服务选网关时有点纠结，为啥大家一般更建议用 L7 负载均衡而不是 L4，主要能带来哪两个好处？",
+    "gold": "在微服务架构中，为什么通常推荐使用 L7 负载均衡而非 L4？请列举两个关键优势。",
+    "domain": "cs_basic",
+    "difficulty": 1,
+    "tier": "B"
+  }
+]
