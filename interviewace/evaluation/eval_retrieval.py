@@ -38,6 +38,12 @@ CHECKPOINT = EVAL_DIR / "retrieval_eval.checkpoint.jsonl"
 
 # ---------------- 指标 ----------------
 
+def norm_key(s: str) -> str:
+    """统一 key：题库 title 存的是题干前 80 字符，检索返回的是完整题干，
+    直接比较会把长题误判为未命中 → 一律按前 80 字符比对。"""
+    return (s or "").strip()[:80]
+
+
 def recall_at_k(ranked: list[str], gold: set[str], k: int) -> float:
     if not gold:
         return 0.0
@@ -124,6 +130,8 @@ def main():
     ap.add_argument("--limit", type=int, default=0, help="只跑前 N 条")
     ap.add_argument("--tier", default="", help="只跑某层（A/B）")
     ap.add_argument("--resume", action="store_true", help="从 checkpoint 续跑")
+    ap.add_argument("--report-only", action="store_true",
+                    help="不重新检索，只用 checkpoint 里已有结果重算报告（改了指标口径时用）")
     args = ap.parse_args()
 
     if not GOLDEN.exists():
@@ -140,13 +148,18 @@ def main():
         golden = golden[:args.limit]
 
     done = {}
-    if args.resume and CHECKPOINT.exists():
+    if (args.resume or args.report_only) and CHECKPOINT.exists():
         for line in CHECKPOINT.read_text(encoding="utf-8").splitlines():
             try:
                 d = json.loads(line)
                 done[d["query"]] = d
             except Exception:
                 pass
+        print(f"已载入 checkpoint {len(done)} 条")
+
+    # 只重算报告：跳过检索
+    if args.report_only:
+        return _write_report(list(done.values()))
         print(f"从 checkpoint 续跑，已完成 {len(done)} 条")
 
     print(f"评测 {len(golden)} 条 query × {len(STRATEGIES)} 策略，k={TOP_KS}")
@@ -171,7 +184,10 @@ def main():
     ckpt_fp.close()
 
     # ---------------- 汇总 ----------------
-    records = list(done.values())
+    return _write_report(list(done.values()))
+
+
+def _write_report(records: list[dict]):
     by_tier = defaultdict(list)
     for r in records:
         by_tier[r["tier"]].append(r)
@@ -195,8 +211,8 @@ def main():
             agg.update({f"ndcg@{k}": [] for k in TOP_KS})
             agg.update({f"hitrate@{k}": [] for k in TOP_KS})
             for r in recs:
-                ranked = r["ranks"].get(st, [])
-                gold = {r["gold"]}
+                ranked = [norm_key(x) for x in r["ranks"].get(st, [])]
+                gold = {norm_key(r["gold"])}
                 for k in TOP_KS:
                     agg[f"recall@{k}"].append(recall_at_k(ranked, gold, k))
                     agg[f"precision@{k}"].append(precision_at_k(ranked, gold, k))
