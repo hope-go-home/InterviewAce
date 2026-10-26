@@ -1,0 +1,110 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: interviewace
+  # 复用 Python 侧同一个 .env（12-factor 配置来源统一）
+  # 兼容两种启动位置：仓库根目录（./.env）与 backend-java（../.env）
+  config:
+    import: optional:file:.env[.properties],optional:file:../.env[.properties]
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:interviewace_db}?useSSL=false&serverTimezone=Asia/Shanghai&characterEncoding=utf-8&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:123456}
+    hikari:
+      # 对应 Python pool_pre_ping：防 MySQL 8 小时断连
+      connection-test-query: SELECT 1
+      keepalive-time: 300000
+      # 对应 Python pool_recycle=3600
+      max-lifetime: 3600000
+      maximum-pool-size: 10
+      minimum-idle: 5
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    # Python 侧 init_db 已建过表时跳过基线，避免重复迁移
+    baseline-on-migrate: true
+  data:
+    redis:
+      host: ${REDIS_HOST:127.0.0.1}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:123456}
+      timeout: 3s
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 30MB
+  jackson:
+    time-zone: UTC
+    # 与 FastAPI 契约对齐：字段名统一 snake_case（session_id / created_at ...）
+    property-naming-strategy: SNAKE_CASE
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+  global-config:
+    banner: false
+    db-config:
+      id-type: auto
+
+knife4j:
+  enable: true
+  production: false
+  setting:
+    language: zh_cn
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+app:
+  jwt:
+    # 默认值仅供无 .env 的裸机开发；生产必须由 JWT_SECRET 注入（HS256 要求 ≥32 字节）
+    secret: ${JWT_SECRET:dev-secret-change-me-please-override-32bytes!}
+    expire-minutes: ${JWT_EXPIRE_MINUTES:720}
+  allow-registration: ${ALLOW_REGISTRATION:true}
+  daily-token-budget: ${DAILY_TOKEN_BUDGET:500000}
+  default-admin:
+    username: ${DEFAULT_ADMIN_USER:admin}
+    password: ${DEFAULT_ADMIN_PASSWORD:admin123}
+  heavy-concurrency: ${MAX_CONCURRENT_HEAVY:8}
+  ai:
+    qwen:
+      api-key: ${QWEN_API_KEY:}
+      base-url: ${QWEN_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+      model: ${QWEN_MODEL:}
+      embedding-model: ${QWEN_EMBEDDING_MODEL:}
+      judge-model: ${JUDGE_MODEL:}
+      vl-model: ${QWEN_VL_OCR_MODEL:qwen-vl-max}
+    milvus:
+      host: ${MILVUS_HOST:127.0.0.1}
+      port: ${MILVUS_PORT:19530}
+      collection: ${RAG_COLLECTION:interview_kb}
+      dim: ${RAG_DIM:2048}
+  stt:
+    api-key: ${VOLC_ASR_API_KEY:}
+    resource-id: ${VOLC_ASR_RESOURCE_ID:}
+    endpoint: ${VOLC_ASR_ENDPOINT:wss://openspeech.bytedance.com/api/v3/sauc/bigmodel_async}
+    sample-rate: 16000
+    segment-ms: 200
+
+logging:
+  file:
+    name: logs/app.log
+  logback:
+    rollingpolicy:
+      max-history: 30
+  level:
+    com.interviewace: info

@@ -67,3 +67,23 @@ jobs:
 
       - name: 构建
         run: npm run build
+
+  backend-java:
+    name: Java 后端测试
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend-java
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 单元测试 + 契约测试 + H2 回归测试
+        run: mvn -B test
+        # 全部用例不依赖外部服务：Service 层 Mockito / Controller standalone MockMvc /
+        # Mapper 层 H2 内存库（MySQL 模式跑真实 SQL）

@@ -2,9 +2,9 @@
 
 面向 **实习 / 校招 / 社招** 的求职备战训练平台 —— 不只是问答，而是「**学 → 练 → 测 → 评**」的完整闭环。
 
-![Stack](https://img.shields.io/badge/FastAPI%20%C2%B7%20LangGraph%20%C2%B7%20Milvus%20%C2%B7%20MySQL%20%C2%B7%20Vue3-blue)
+![Stack](https://img.shields.io/badge/SpringBoot3%20%C2%B7%20MyBatisPlus%20%C2%B7%20FastAPI%20%C2%B7%20LangGraph%20%C2%B7%20Milvus%20%C2%B7%20MySQL%20%C2%B7%20Vue3-blue)
 ![KB](https://img.shields.io/badge/题库-13411%20条-purple)
-![Tests](https://img.shields.io/badge/tests-32%20passed-brightgreen)
+![Tests](https://img.shields.io/badge/tests-32%20py%20%2B%2034%20java-brightgreen)
 ![CI](https://github.com/hope-go-home/InterviewAce/actions/workflows/ci.yml/badge.svg)
 
 ---
@@ -61,6 +61,27 @@ FastAPI 网关（JWT · 限流 · 并发背压 · Prometheus · 健康探针） 
 - **状态存 MySQL，不用内存 checkpointer**：模拟面试每轮独立执行，重启/刷新不丢现场，多实例天然安全
 - **评分必带检索出的参考答案**：让「AI 点评」有据可依，而不是凭模型记忆
 - **练习抽题不走向量检索**：标量过滤直抽（~50ms），把重排留给真正需要语义匹配的问答
+
+---
+
+## Java 企业级后端（backend-java/）
+
+在原 FastAPI 版本稳定运行后，**用 Spring Boot 3 完整重写了后端**（同一前端、同一数据库、同一 API 契约，可灰度切换）：
+
+```
+Spring Boot 3.3 + Java 21 + MyBatis-Plus + Flyway + Redis + JWT + Milvus SDK
+   ├─ 与 Python 版互通：BCrypt 密码哈希免迁移、JWT HS256 同构、snake_case JSON 契约
+   ├─ 完整移植：SSE 流式问答（意图分析→检索改写重试→联网兜底）、图片问答（多模态）、
+   │            练习评分、面试追问状态机、简历解析、长期记忆注入、待补题池自增长
+   ├─ 工程加固：Flyway 迁移、Redis 分布式限流（降级进程内）、审计日志、Actuator + Prometheus
+   └─ 34 个测试：Service 单测（Mockito）+ Controller 契约测试（standalone MockMvc）
+                 + Mapper 回归测试（H2 内存库跑真实 SQL）
+```
+
+```bash
+cd backend-java && mvn test          # 跑测试（无外部依赖）
+mvn package && java -jar target/interviewace-backend-1.0.0.jar   # 起服务（:8002）
+```
 
 ---
 
@@ -164,13 +185,15 @@ python scripts/eval_gate.py --update-baseline                      # 记录基�
 
 ```
 InterviewAce/
-├── interviewace/
-│   ├── backend/          # FastAPI（main/auth/config/logger/metrics/ratelimit/health）
-│   │   ├── cache.py      #   进程内 TTL+LRU 缓存（embedding / LLM 响应）
-│   │   └── database/     #   milvus.py（schema）/ mysql.py（12 张表）
-│   ├── rag/              # embedding / retriever / ingest / qa_ingest
-│   ├── services/         # qa / practice / interview / resume / stt / question_selector
-│   └── evaluation/       # 评测脚本 + 金标集 + baseline + report
+├── backend-java/         # Java 后端（企业级重写版）：controller / service / mapper / security
+│   └── src/test/         #   34 测试：Service 单测 + Controller 契约 + Mapper H2 回归
+├── interviewace/         # Python 后端（原版）
+│   ├── backend/          #   FastAPI（main/auth/config/logger/metrics/ratelimit/health）
+│   │   ├── cache.py      #     进程内 TTL+LRU 缓存（embedding / LLM 响应）
+│   │   └── database/     #     milvus.py（schema）/ mysql.py（12 张表）
+│   ├── rag/              #   embedding / retriever / ingest / qa_ingest
+│   ├── services/         #   qa / practice / interview / resume / stt / question_selector
+│   └── evaluation/       #   评测脚本 + 金标集 + baseline + report
 ├── data_pipeline/        # 数据管线（schema/dedup/stats/qc_judge/taxonomy + 10+ 个 ETL）
 ├── frontend/             # Vue3 + Vite（登录/问答/题库/练习/简历/面试/画像）
 ├── scripts/              # ingest_all / eval_gate / create_user
@@ -203,7 +226,7 @@ pytest tests/            # 21 单测（纯函数）+ 11 集成测试（依赖不
 python scripts/eval_gate.py   # 评测回归门禁
 ```
 
-GitHub Actions 三个 job：单元测试 + 编译检查 / 评测回归门禁 / 前端构建。
+GitHub Actions 四个 job：Python 单元测试 + 编译检查 / 评测回归门禁 / Java 后端测试（34 个）/ 前端构建。
 
 ---
 
