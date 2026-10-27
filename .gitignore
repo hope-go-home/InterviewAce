@@ -7,10 +7,11 @@ __pycache__/
 # 环境与密钥
 .env
 
-# 数据（版权敏感，不开源）
-data/raw/
-data/jsonl/
-data/resumes/
+# 数据（版权敏感，不开源）——已归入 legacy-python/
+legacy-python/data/raw/
+legacy-python/data/jsonl/
+legacy-python/data/resumes/
+legacy-python/data/hf-cache/
 
 # 日志
 logs/

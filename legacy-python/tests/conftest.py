@@ -11,10 +11,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-# 1) 先加载真实 .env（不覆盖已有环境变量）
+# 1) 先加载真实 .env（不覆盖已有环境变量）；.env 在仓库根目录（legacy-python 的上一级）
 try:
     from dotenv import dotenv_values
-    for k, v in (dotenv_values(ROOT / ".env") or {}).items():
+    env_file = ROOT / ".env"
+    if not env_file.exists():
+        env_file = ROOT.parent / ".env"
+    for k, v in (dotenv_values(env_file) or {}).items():
         if v is not None and k not in os.environ:
             os.environ[k] = v
 except Exception:

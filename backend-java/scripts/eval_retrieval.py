@@ -16,8 +16,8 @@ import urllib.request
 from pathlib import Path
 
 BASE = "http://localhost:8002"
-GOLDEN = Path(__file__).resolve().parents[2] / "interviewace" / "evaluation" / "golden_interview.json"
-BASELINE = Path(__file__).resolve().parents[2] / "interviewace" / "evaluation" / "baseline.json"
+GOLDEN = Path(__file__).resolve().parents[2] / "legacy-python" / "interviewace" / "evaluation" / "golden_interview.json"
+BASELINE = Path(__file__).resolve().parents[2] / "legacy-python" / "interviewace" / "evaluation" / "baseline.json"
 
 
 def norm_key(s: str) -> str:

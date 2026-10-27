@@ -15,7 +15,7 @@ networks:
 services:
   backend:
     build:
-      context: .
+      context: ./legacy-python
       dockerfile: Dockerfile
     container_name: interviewace-backend
     restart: unless-stopped
@@ -29,8 +29,8 @@ services:
       # 本地模型缓存复用宿主机已下载的 bge-m3 / bge-reranker
       HF_HOME: /hf-cache
     volumes:
-      - ${HF_CACHE_DIR:-./data/hf-cache}:/hf-cache
-      - ./data:/app/data
+      - ${HF_CACHE_DIR:-./legacy-python/data/hf-cache}:/hf-cache
+      - ./legacy-python/data:/app/data
       - ./logs:/app/logs
     ports:
       - "8002:8002"

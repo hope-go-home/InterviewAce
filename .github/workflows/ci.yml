@@ -27,10 +27,10 @@ jobs:
                       sqlalchemy pymysql pymilvus prometheus-client tenacity
 
       - name: 编译检查（所有模块可正常解析）
-        run: python -m compileall -q interviewace data_pipeline
+        run: python -m compileall -q legacy-python/interviewace legacy-python/data_pipeline
 
       - name: 单元测试
-        run: pytest tests/ -q
+        run: pytest legacy-python/tests/ -q
         # 集成测试在 CI 里没有 Milvus/MySQL，会自动 skip；单测必须全绿
 
   eval-gate:
@@ -44,7 +44,7 @@ jobs:
           python-version: "3.11"
 
       - name: 校验评测指标未回归
-        run: python scripts/eval_gate.py --tier B
+        run: python legacy-python/scripts/eval_gate.py --tier B
         # 仅比对已提交的评测报告与基线（不需要 Milvus/MySQL）
         # 指标跌超 3% 即失败，阻断合并
 
