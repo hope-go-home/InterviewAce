@@ -53,6 +53,8 @@ public class SttService {
         }
         if (segments.isEmpty()) segments.add(new byte[0]);
 
+        // 豆包每帧的 utterances 是累计列表（已 definite 的句子会重复出现在后续帧），
+        // 所以不能逐帧 append——保留最新一帧的 definite 拼接即可，最后一帧即完整定稿
         List<String> finalTexts = new ArrayList<>();
         StringBuilder lastText = new StringBuilder();
         try (DoubaoAsrSession sess = DoubaoAsrSession.connect(cfg)) {
@@ -73,9 +75,14 @@ public class SttService {
                     log.warn("doubao asr error code={}", p.code);
                     break;
                 }
-                if (!p.definiteText.isEmpty()) finalTexts.add(p.definiteText);
-                if (!p.allText.isEmpty()) lastText.setLength(0);
-                if (!p.allText.isEmpty()) lastText.append(p.allText);
+                if (!p.definiteText.isEmpty()) {
+                    finalTexts.clear();
+                    finalTexts.add(p.definiteText);
+                }
+                if (!p.allText.isEmpty()) {
+                    lastText.setLength(0);
+                    lastText.append(p.allText);
+                }
                 if (p.isLast) break;
             }
         }
