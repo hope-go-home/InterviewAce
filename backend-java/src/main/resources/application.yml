@@ -88,6 +88,9 @@ app:
       embedding-model: ${QWEN_EMBEDDING_MODEL:}
       judge-model: ${JUDGE_MODEL:}
       vl-model: ${QWEN_VL_OCR_MODEL:qwen-vl-max}
+      # 云端重排（替代 Python 本地 bge-reranker）；留空则退化为纯稠密排序
+      rerank-model: ${RERANK_MODEL:qwen3.7-text-rerank}
+      rerank-url: ${RERANK_URL:https://dashscope.aliyuncs.com/api/v1/services/rerank/text-rerank/text-rerank}
     milvus:
       host: ${MILVUS_HOST:127.0.0.1}
       port: ${MILVUS_PORT:19530}

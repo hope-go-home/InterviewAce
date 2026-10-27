@@ -50,6 +50,8 @@ public class AppProperties {
         private String embeddingModel;
         private String judgeModel;
         private String vlModel;
+        private String rerankModel;
+        private String rerankUrl;
     }
 
     @Data

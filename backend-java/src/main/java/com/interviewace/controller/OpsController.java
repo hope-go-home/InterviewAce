@@ -92,4 +92,30 @@ public class OpsController {
         out.put("embedding", embeddingOk);
         return out;
     }
+
+    @Operation(summary = "检索调试：只检索不生成，返回排序结果与重排分（评测/排障用）")
+    @GetMapping("/debug/retrieve")
+    public Map<String, Object> debugRetrieve(@CurrentUser UserContext user,
+                                             @org.springframework.web.bind.annotation.RequestParam String query,
+                                             @org.springframework.web.bind.annotation.RequestParam(defaultValue = "10") int topK,
+                                             @org.springframework.web.bind.annotation.RequestParam(required = false) String qType) {
+        var result = retrieval.retrieve(query, topK, null, null, qType);
+        List<Map<String, Object>> sources = result.sources().stream()
+                .map(s -> {
+                    Map<String, Object> m = new LinkedHashMap<>();
+                    m.put("title", s.title());
+                    m.put("q_type", s.qType());
+                    m.put("domain", s.domain());
+                    m.put("rank", s.rank());
+                    m.put("dense_score", s.score());
+                    m.put("rerank_score", s.rerankScore());
+                    return m;
+                })
+                .toList();
+        Map<String, Object> out = new LinkedHashMap<>();
+        out.put("query", query);
+        out.put("count", sources.size());
+        out.put("sources", sources);
+        return out;
+    }
 }

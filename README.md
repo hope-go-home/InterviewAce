@@ -78,6 +78,17 @@ Spring Boot 3.3 + Java 21 + MyBatis-Plus + Flyway + Redis + JWT + Milvus SDK
                  + Mapper 回归测试（H2 内存库跑真实 SQL）
 ```
 
+**检索质量回归评测**（同一金标集 60 条、同一口径，脚本 `backend-java/scripts/eval_retrieval.py`）：
+
+| 指标 | Java 稠密+云端重排（qwen3.7-text-rerank） | Python 纯稠密 | Python 混合+本地重排 |
+|---|---|---|---|
+| Recall@1 | 0.917 | 0.917 | 0.933 |
+| Recall@10 | **1.000** | 0.950 | 0.950 |
+| MRR@10 | **0.941** | 0.928 | 0.937 |
+| nDCG@10 | **0.955** | 0.934 | 0.940 |
+
+Java 版未移植本地稀疏/重排模型，改用 DashScope 云端 rerank API——Recall@10 满分，MRR/nDCG 反超本地重排链路。
+
 ```bash
 cd backend-java && mvn test          # 跑测试（无外部依赖）
 mvn package && java -jar target/interviewace-backend-1.0.0.jar   # 起服务（:8002）

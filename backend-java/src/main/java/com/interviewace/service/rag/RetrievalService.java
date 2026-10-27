@@ -11,11 +11,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.interviewace.service.llm.EmbeddingService;
+import com.interviewace.service.llm.RerankService;
 
 /**
- * 简化版稠密检索器：embed → Milvus dense search → 结构化结果。
- * Java 版不使用 BGE-M3 稀疏向量和 CrossEncoder 重排（Python ML 依赖），
- * 改为纯稠密 IP 检索 + 按分数截断，效果相近且零额外依赖。
+ * 稠密检索 + 云端重排：embed → Milvus dense search → qwen3.7-text-rerank 重排 → 截断。
+ * 对应 Python retriever.py 的稠密通道 + CrossEncoder 重排段（稀疏通道不移植）。
+ * 重排服务不可用时自动降级为稠密分数排序，保证检索永远可用。
  */
 @Service
 public class RetrievalService {
@@ -26,13 +27,15 @@ public class RetrievalService {
 
     private final MilvusService milvus;
     private final EmbeddingService embedding;
+    private final RerankService rerank;
     private final Map<String, CacheEntry> cache = new ConcurrentHashMap<>();
     private final java.util.concurrent.atomic.LongAdder hits = new java.util.concurrent.atomic.LongAdder();
     private final java.util.concurrent.atomic.LongAdder misses = new java.util.concurrent.atomic.LongAdder();
 
-    public RetrievalService(MilvusService milvus, EmbeddingService embedding) {
+    public RetrievalService(MilvusService milvus, EmbeddingService embedding, RerankService rerank) {
         this.milvus = milvus;
         this.embedding = embedding;
+        this.rerank = rerank;
     }
 
     /** 缓存统计（对应 Python cache.stats()）*/
@@ -49,14 +52,19 @@ public class RetrievalService {
         return out;
     }
 
-    /** 核心检索：域过滤 + 稠密向量检索 */
+    /** 核心检索：域过滤 + 稠密向量检索 + 云端重排 */
     public RetrievalResult retrieve(String query, int topK, String domain, String position) {
+        return retrieve(query, topK, domain, position, null);
+    }
+
+    /** qType 供评测/调试过滤题型（如 qa_pair）；QA 主链路不过滤（与 Python 一致） */
+    public RetrievalResult retrieve(String query, int topK, String domain, String position, String qType) {
         if (!milvus.isReady()) {
             return RetrievalResult.empty();
         }
 
         // 缓存
-        String key = query + "|" + domain + "|" + position;
+        String key = query + "|" + domain + "|" + position + "|" + qType;
         CacheEntry cached = cache.get(key);
         if (cached != null && System.currentTimeMillis() - cached.time < CACHE_TTL_MS) {
             hits.increment();
@@ -65,7 +73,7 @@ public class RetrievalService {
         misses.increment();
 
         // 构造过滤
-        String expr = MilvusService.buildFilterExpr(domain, null, null, null, position);
+        String expr = MilvusService.buildFilterExpr(domain, qType, null, null, position);
         boolean crossDomain = false;
 
         // 嵌入查询
@@ -82,18 +90,34 @@ public class RetrievalService {
             crossDomain = true;
         }
 
-        // 去重 + 截断
-        List<RetrievalSource> sources = new ArrayList<>();
+        // 去重（候选池保留到重排规模，截断留给重排后做）
+        List<MilvusService.SearchHit> candidates = new ArrayList<>();
         java.util.HashSet<String> seen = new java.util.HashSet<>();
         for (MilvusService.SearchHit hit : hits) {
             String id = hit.parentText() + "|" + hit.title();
             if (!seen.add(id)) continue;
-            sources.add(new RetrievalSource(
-                    hit.parentText(), hit.text(),
-                    sources.size() + 1, hit.score(), hit.score(),
-                    hit.qType(), hit.domain(), hit.difficulty(),
-                    hit.company(), hit.source(), hit.title(), hit.url()));
-            if (sources.size() >= topK) break;
+            candidates.add(hit);
+        }
+
+        // 云端重排（对应 Python CrossEncoder rerank；失败降级为稠密分排序）
+        double[] scores = rerank.rerank(query,
+                candidates.stream().map(MilvusService.SearchHit::parentText).toList());
+        List<RetrievalSource> sources = new ArrayList<>();
+        if (scores != null) {
+            Integer[] order = new Integer[candidates.size()];
+            for (int i = 0; i < order.length; i++) order[i] = i;
+            java.util.Arrays.sort(order, (a, b) -> Double.compare(scores[b], scores[a]));
+            int rank = 0;
+            for (int idx : order) {
+                MilvusService.SearchHit hit = candidates.get(idx);
+                sources.add(toSource(hit, ++rank, scores[idx]));
+                if (sources.size() >= topK) break;
+            }
+        } else {
+            for (MilvusService.SearchHit hit : candidates) {
+                sources.add(toSource(hit, sources.size() + 1, hit.score()));
+                if (sources.size() >= topK) break;
+            }
         }
 
         List<String> documents = sources.stream().map(RetrievalSource::parentText).toList();
@@ -111,6 +135,14 @@ public class RetrievalService {
         }
         cache.put(key, new CacheEntry(result, System.currentTimeMillis()));
         return result;
+    }
+
+    private static RetrievalSource toSource(MilvusService.SearchHit hit, int rank, double rerankScore) {
+        return new RetrievalSource(
+                hit.parentText(), hit.text(),
+                rank, hit.score(), (float) rerankScore,
+                hit.qType(), hit.domain(), hit.difficulty(),
+                hit.company(), hit.source(), hit.title(), hit.url());
     }
 
     private record CacheEntry(RetrievalResult result, long time) {}
