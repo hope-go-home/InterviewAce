@@ -106,10 +106,11 @@ docker compose -f docker-compose.app.yml up -d --build
 
 ### Java 版检索评测（当前链路）
 
-金标集 60 条口语化改写 query，直打 `/debug/retrieve` 检索调试端点（不经过 LLM 生成），脚本 `backend-java/scripts/eval_retrieval.py`：
+金标集 60 条口语化改写 query，直打 `/debug/retrieve` 检索调试端点（不经过 LLM 生成），评测类 `LiveRetrievalEvalTest`（纯 Java，默认跳过）：
 
 ```bash
-python backend-java/scripts/eval_retrieval.py    # 需后端已启动
+# 需后端已启动；约 1-3 分钟
+LIVE_EVAL=1 mvn test -Dtest=LiveRetrievalEvalTest     # Windows cmd: set LIVE_EVAL=1 && mvn ...
 ```
 
 | 指标 | **Java 稠密+云端重排** | Python 纯稠密 | Python 混合+本地重排 |
@@ -175,9 +176,8 @@ Java 版未移植本地稀疏/重排模型，改用 DashScope 云端 rerank API�
 InterviewAce/
 ├── backend-java/         # ★ 主后端（Spring Boot 3 + Java 21）
 │   ├── src/main/         #   controller / service / mapper / security / config
-│   ├── src/test/         #   41 测试：Service 单测(Mockito) + Controller 契约(MockMvc)
-│   │                     #   + Mapper 回归(H2 跑真实 SQL)
-│   └── scripts/          #   eval_retrieval.py（金标集检索评测，直打 /debug/retrieve）
+│   └── src/test/         #   41 测试 + LiveRetrievalEvalTest（金标集检索评测，
+│                         #   直打 /debug/retrieve，LIVE_EVAL=1 时实弹触发）
 ├── frontend/             # Vue3 + Vite（登录/问答/题库/练习/简历/面试/画像）
 ├── legacy-python/        # FastAPI 原型 + 数据/评测工具链（运行系统不依赖它）
 │   ├── interviewace/     #   原版后端包 + evaluation（金标集/基线/评测报告）
